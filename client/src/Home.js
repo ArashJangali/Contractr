@@ -2,18 +2,10 @@ import { useState, useContext, useEffect } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import AuthModal from "./AuthModal";
-import { UserTypeContext } from './UserTypeContext';
 
-const Home = () => {
-
+const Home = ({ setClient, setFreelancer, client, freelancer }) => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isSignUp, setIsSignUp] = useState(true);
-
-  const [client, setClient] = useState(false);
-  const [freelancer, setFreelancer] = useState(false);
-  const { setUserType } = useContext(UserTypeContext)
-
-  
 
   const loggedIn = false;
 
@@ -21,11 +13,6 @@ const Home = () => {
     setShowAuthModal(true);
     setIsSignUp(true);
   };
-  // useEffect(() => {
-  //   setUserType(freelancer ? 'freelancer' : 'client');
-  // }, [freelancer, client]);
-  
-  console.log('freelancer', freelancer)
 
   return (
     <div className="viewportHome">
@@ -46,7 +33,7 @@ const Home = () => {
             value="freelancer"
             onChange={() => {
               setFreelancer(true);
-              setClient(false)
+              setClient(false);
             }}
           />
           <label htmlFor="freelancer">I'm a Freelancer</label>
@@ -58,7 +45,7 @@ const Home = () => {
             value="client"
             onChange={() => {
               setClient(true);
-              setFreelancer(false)
+              setFreelancer(false);
             }}
           />
           <label htmlFor="client">I'm a Client</label>
@@ -80,7 +67,6 @@ const Home = () => {
       </div>
 
       <Footer />
-      
     </div>
   );
 };

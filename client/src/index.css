@@ -11,13 +11,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
-  background-color:rgb(72, 70, 65)
-
+  background-color: rgb(72, 70, 65)
 }
 
 #root {
   overflow: hidden;
 }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

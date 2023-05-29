@@ -16,7 +16,7 @@ function Customer({
   setLikeClicked,
   likeClicked,
   setDislikeClicked,
-  dislikeClicked
+  dislikeClicked,
 }) {
   const [clients, setClients] = useState([]);
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -42,7 +42,6 @@ function Customer({
         params: { userId },
       });
       setUnmatchedClients(response.data);
-      console.log("unmatchedClientsinCustomer", response.data);
     }
     if (userId) {
       getUnmatchedClients();

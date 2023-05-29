@@ -3,9 +3,6 @@ import Footer from "./Footer";
 import axios from "./axios.js";
 import { useEffect, useState } from "react";
 
-
-
-
 function Connections({
   user,
   setClickedFreelancer,
@@ -18,15 +15,13 @@ function Connections({
   setSelectedPerson,
   selectedPerson,
   unmatchedFreelancers,
-  unmatchedClients
+  unmatchedClients,
 }) {
   const userId = user
     ? isClient
       ? user["client_user_id"]
       : user["user_id"]
     : null;
-
-    
 
   const likedFreelancerIds =
     user?.client_connects
@@ -39,8 +34,6 @@ function Connections({
   const [likedFreelancers, setLikedFreelancers] = useState(null);
 
   const [likedClients, setLikedClients] = useState(null);
-
- 
 
   useEffect(() => {
     if (!user) {
@@ -60,8 +53,6 @@ function Connections({
   }, [user]);
 
   // retrieving the liked freelancers
-
-
 
   async function displayLikedFreelancers() {
     if (!likedFreelancerIds || likedFreelancerIds.length === 0) {
@@ -109,19 +100,17 @@ function Connections({
 
   const matchedFreelancers = likedFreelancers?.filter(
     (likedFreelancer) =>
-      likedFreelancer.connects.filter((object) => object.user_id == userId) 
-        .length > 0 
+      likedFreelancer.connects.filter((object) => object.user_id == userId)
+        .length > 0
   );
 
-
   const filteredMatchedFreelancers = matchedFreelancers?.filter(
-    (matchedFreelancers) => 
-    !unmatchedFreelancers.some(
-      (unmatchedFreelancers) =>
-      unmatchedFreelancers.client_user_id === matchedFreelancers.user_id
-    )
-  )
-
+    (matchedFreelancers) =>
+      !unmatchedFreelancers.some(
+        (unmatchedFreelancers) =>
+          unmatchedFreelancers.client_user_id === matchedFreelancers.user_id
+      )
+  );
 
   const matchedClients = likedClients?.filter(
     (likedClient) =>
@@ -132,19 +121,17 @@ function Connections({
 
   const filteredMatchedClients = matchedClients?.filter(
     (matchedClient) =>
-    !unmatchedClients.some(
-      (unmatchedClient) =>
-      unmatchedClient.user_id === matchedClient.client_user_id
-    )
-  )
+      !unmatchedClients.some(
+        (unmatchedClient) =>
+          unmatchedClient.user_id === matchedClient.client_user_id
+      )
+  );
 
-    const matched = isFreelancer ? filteredMatchedClients : filteredMatchedFreelancers;
+  const matched = isFreelancer
+    ? filteredMatchedClients
+    : filteredMatchedFreelancers;
 
-  
-  
- 
   return (
-    
     <div className="connects" style={{ overflow: "scroll", height: "300px" }}>
       {matched?.map((likedPerson, _index) => {
         const isSelected = selectedPerson._id === likedPerson._id;
@@ -154,9 +141,8 @@ function Connections({
               borderLeft: "2px solid lightBlue",
             }
           : {};
-          
+
         return (
-          
           <div
             key={{ _index }}
             className="likedPeople"
@@ -165,13 +151,9 @@ function Connections({
                 ? handleClientClick(likedPerson)
                 : handleFreelancerClick(likedPerson)
             }
->
-         
-          
+          >
             <div className="img-container">
-            
               <img
-              
                 src={
                   likedPerson && isFreelancer
                     ? likedPerson.client_url
@@ -185,15 +167,13 @@ function Connections({
                 style={imgBorderStyle}
               />
             </div>
-             
+
             <h3>
               {likedPerson && isFreelancer
                 ? likedPerson.client_first_name
                 : likedPerson.first_name}
             </h3>
-            
           </div>
-          
         );
       })}
     </div>

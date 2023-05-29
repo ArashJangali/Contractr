@@ -16,7 +16,6 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CancelIcon from "@mui/icons-material/Cancel";
 import UnmatchButton from "./UnMatchButton";
-import { UserTypeContext } from './UserTypeContext';
 
 function ClientDashboard() {
   const [chatActivate, setChatActivate] = useState(false);
@@ -34,9 +33,13 @@ function ClientDashboard() {
   const [unmatchedClients, setUnmatchedClients] = useState([]);
   const [likeClicked, setLikeClicked] = useState(false);
   const [dislikeClicked, setDislikeClicked] = useState(false);
-  const { setUserType } = useContext(UserTypeContext)
+  const [freelancer, setFreelancer] = useState(null);
 
-  setUserType(isFreelancer ? 'freelancer' : 'client')
+  useEffect(() => {
+    if (user?.user_id) {
+      setFreelancer(true);
+    }
+  }, [user]);
 
   function handleUndoClick() {
     setUndoClicked(true);
@@ -69,82 +72,91 @@ function ClientDashboard() {
   }, []);
 
   return (
-    <div>
-      <div className="centerMain">
-        <ChatToggle
-          chatActivate={chatActivate}
-          setChatActivate={setChatActivate}
-        />
+    freelancer && (
+      <div>
+        <div className="centerMain">
+          <ChatToggle
+            chatActivate={chatActivate}
+            setChatActivate={setChatActivate}
+          />
 
-        <MessageToggle
-          messageActivate={messageActivate}
-          setMessageActivate={setMessageActivate}
-        />
-        <div className="chat-message-container">
-          <Chat
-            isFreelancer={isFreelancer}
-            visible={chatActivate || thumbs}
-            user={user}
-            cookies={cookies}
-            removeCookie={removeCookie}
-            clickedClient={clickedClient}
-            setClickedClient={setClickedClient}
+          <MessageToggle
             messageActivate={messageActivate}
-            setSelectedPerson={setSelectedPerson}
-            selectedPerson={selectedPerson}
-            unmatchedClients={unmatchedClients}
+            setMessageActivate={setMessageActivate}
           />
-          <Message
-            isFreelancer={isFreelancer}
-            messageVisible={messageActivate || messageClicked}
-            removeCookie={removeCookie}
-            cookies={cookies}
-            user={user}
-          />
-        </div>
-        <div className="main">
-          <Engagement
-            setThumbs={setThumbs}
-            thumbs={thumbs}
-            messageClicked={messageClicked}
-            setMessageClicked={setMessageClicked}
-          />
-          <Customer
-            user={user}
-            getUser={getUser}
-            setUndoClicked={setUndoClicked}
-            undoClicked={undoClicked}
-            setLikeClicked={setLikeClicked}
-            likeClicked={likeClicked}
-            setDislikeClicked={setDislikeClicked}
-            dislikeClicked={dislikeClicked}
-          />
-          <div className="mainButtons">
-            <IconButton onClick={handleLikeClick} style={{ color: "#F44336" }}>
-              <FavoriteIcon fontSize="large" />
-            </IconButton>
-            <IconButton onClick={handleDislikeClick} style={{ color: "#757575" }}>
-              <CancelIcon fontSize="large" />
-            </IconButton>
-            <IconButton onClick={handleUndoClick} style={{ color: "#2196F3" }}>
-              <UndoIcon fontSize="large" />
-            </IconButton>
-            <UnmatchButton
-              thumbs={thumbs}
-              user={user}
+          <div className="chat-message-container">
+            <Chat
               isFreelancer={isFreelancer}
+              visible={chatActivate || thumbs}
+              user={user}
+              cookies={cookies}
+              removeCookie={removeCookie}
+              clickedClient={clickedClient}
+              setClickedClient={setClickedClient}
+              messageActivate={messageActivate}
+              setSelectedPerson={setSelectedPerson}
               selectedPerson={selectedPerson}
-              setUnmatchedClients={setUnmatchedClients}
               unmatchedClients={unmatchedClients}
             />
+            <Message
+              isFreelancer={isFreelancer}
+              messageVisible={messageActivate || messageClicked}
+              removeCookie={removeCookie}
+              cookies={cookies}
+              user={user}
+            />
           </div>
-          <Preference
-          isFreelancer={true}
-          />
+          <div className="main">
+            <Engagement
+              setThumbs={setThumbs}
+              thumbs={thumbs}
+              messageClicked={messageClicked}
+              setMessageClicked={setMessageClicked}
+            />
+            <Customer
+              user={user}
+              getUser={getUser}
+              setUndoClicked={setUndoClicked}
+              undoClicked={undoClicked}
+              setLikeClicked={setLikeClicked}
+              likeClicked={likeClicked}
+              setDislikeClicked={setDislikeClicked}
+              dislikeClicked={dislikeClicked}
+            />
+            <div className="mainButtons">
+              <IconButton
+                onClick={handleLikeClick}
+                style={{ color: "#F44336" }}
+              >
+                <FavoriteIcon fontSize="large" />
+              </IconButton>
+              <IconButton
+                onClick={handleDislikeClick}
+                style={{ color: "#757575" }}
+              >
+                <CancelIcon fontSize="large" />
+              </IconButton>
+              <IconButton
+                onClick={handleUndoClick}
+                style={{ color: "#2196F3" }}
+              >
+                <UndoIcon fontSize="large" />
+              </IconButton>
+              <UnmatchButton
+                thumbs={thumbs}
+                user={user}
+                isFreelancer={isFreelancer}
+                selectedPerson={selectedPerson}
+                setUnmatchedClients={setUnmatchedClients}
+                unmatchedClients={unmatchedClients}
+              />
+            </div>
+            <Preference isFreelancer={true} />
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
-    </div>
+    )
   );
 }
 

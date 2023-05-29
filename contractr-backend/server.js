@@ -55,133 +55,134 @@ app.get("/", (req, res) => res.status(200).send("It's working!"));
 // client signup
 
 app.post("/clientsignup", async (req, res) => {
-    const clientemail = req.body.email;
-    const clientpass = req.body.password;
-    const generatedClientId = uuidv4();
-    const hashedClientPassword = await bcrypt.hash(clientpass, 10);
+  const clientemail = req.body.email;
+  const clientpass = req.body.password;
+  const generatedClientId = uuidv4();
+  const hashedClientPassword = await bcrypt.hash(clientpass, 10);
 
-    try {
+  try {
+    const existingClient = await Client.findOne({ clientemail });
 
-        const existingClient = await Client.findOne({clientemail})
-
-        if(existingClient) {
-            return res.status(409).send("The provided email is already in use. Please log in or use a different email to register.")
-        }
-        const lowerCaseClientEmail = clientemail.toLowerCase();
-        const clientData = {
-            client_user_id: generatedClientId,
-            email: lowerCaseClientEmail,
-            password: hashedClientPassword
-        }
-        const newClientUser = new Client(clientData);
-        const createdClient = await newClientUser.save();
-
-        const payload = {
-            client_user_id: generatedClientId,
-            email: lowerCaseClientEmail
-        }
-        const token = jwt.sign(payload, secretKey, {
-            expiresIn: 60 * 24
-        })
-        res.status(201).json({ token, client_user_id: generatedClientId })
-    } catch(err) {
-        console.log(err);
+    if (existingClient) {
+      return res
+        .status(409)
+        .send(
+          "The provided email is already in use. Please log in or use a different email to register."
+        );
     }
+    const lowerCaseClientEmail = clientemail.toLowerCase();
+    const clientData = {
+      client_user_id: generatedClientId,
+      email: lowerCaseClientEmail,
+      password: hashedClientPassword,
+    };
+    const newClientUser = new Client(clientData);
+    const createdClient = await newClientUser.save();
 
-})
+    const payload = {
+      client_user_id: generatedClientId,
+      email: lowerCaseClientEmail,
+    };
+    const token = jwt.sign(payload, secretKey, {
+      expiresIn: 60 * 24,
+    });
+    res.status(201).json({ token, client_user_id: generatedClientId });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 
 // contractor sign up
-app.post("/signup", async(req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    
+app.post("/signup", async (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
 
-    const genuserId = uuidv4();
-    const hashedPassword = await bcrypt.hash(password, 10);
+  const genuserId = uuidv4();
+  const hashedPassword = await bcrypt.hash(password, 10);
 
-    try {
+  try {
+    const existingUser = await User.findOne({ email });
 
-        const existingUser = await User.findOne({email})
-
-        if (existingUser) {
-            return res.status(409).send("The provided email is already in use. Please log in or use a different email to register.")
-        }
-        const lowerCaseEmail = email.toLowerCase();
-
-        const data = {
-            user_id: genuserId,
-            email: lowerCaseEmail,
-            password: hashedPassword
-        }
-        const newUser = new User(data);
-        const createdUser = await newUser.save()
-
-        const payload = {
-            user_id: genuserId,
-            email: lowerCaseEmail
-        }
-
-        const token = jwt.sign(payload, secretKey, {
-            expiresIn: 60 * 24
-        })
-
-        res.status(201).json({ token, userID: genuserId })
-    } catch (err) {
-        console.log(err);
+    if (existingUser) {
+      return res
+        .status(409)
+        .send(
+          "The provided email is already in use. Please log in or use a different email to register."
+        );
     }
+    const lowerCaseEmail = email.toLowerCase();
+
+    const data = {
+      user_id: genuserId,
+      email: lowerCaseEmail,
+      password: hashedPassword,
+    };
+    const newUser = new User(data);
+    const createdUser = await newUser.save();
+
+    const payload = {
+      user_id: genuserId,
+      email: lowerCaseEmail,
+    };
+
+    const token = jwt.sign(payload, secretKey, {
+      expiresIn: 60 * 24,
+    });
+
+    res.status(201).json({ token, userID: genuserId });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // client login
-app.post('/clientlogin', async (req, res) => {
-    const { email, password } = req.body
+app.post("/clientlogin", async (req, res) => {
+  const { email, password } = req.body;
 
-    try {
+  try {
+    const client = await Client.findOne({ email });
+    const correctPassword = await bcrypt.compare(password, client.password);
 
-        const client = await Client.findOne({ email })
-        const correctPassword = await bcrypt.compare(password, client.password)
-
-        if (client && correctPassword) {
-            const token = jwt.sign({client, email}, secretKey, {
-                expiresIn: 60 * 24
-            })
-           return res.status(201).json({ token, client_user_id: client.client_user_id })
-        }
-        res.status(400).send('Invalid Credentials')
-    } catch(error) {
-        console.log(error)
+    if (client && correctPassword) {
+      const token = jwt.sign({ client, email }, secretKey, {
+        expiresIn: 60 * 24,
+      });
+      return res
+        .status(201)
+        .json({ token, client_user_id: client.client_user_id });
     }
-})
+    res.status(400).send("Invalid Credentials");
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send("Something went wrong!");
-  });
+  console.error(err.stack);
+  res.status(500).send("Something went wrong!");
+});
   
 
 // contractor login
-app.post('/login', async (req,res) => {
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
 
-    const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    const correctPassword = await bcrypt.compare(password, user.password);
 
-    try {
-
-        const user = await User.findOne({ email })
-        const correctPassword = await bcrypt.compare(password, user.password)
-
-
-        if (user && correctPassword) {
-            const token = jwt.sign({user, email}, secretKey, {
-                expiresIn: 60 * 24
-            })
-           return res.status(201).json({ token, userID: user.user_id })
-        }
-        res.status(400).send('Invalid Credentials')
-    } catch(error) {
-        console.log(error)
+    if (user && correctPassword) {
+      const token = jwt.sign({ user, email }, secretKey, {
+        expiresIn: 60 * 24,
+      });
+      return res.status(201).json({ token, userID: user.user_id });
     }
-   
-}) 
+    res.status(400).send("Invalid Credentials");
+  } catch (error) {
+    console.log(error);
+  }
+}); 
 
 
 // initialize passportjs and session
@@ -191,14 +192,12 @@ app.use(
     resave: false,
     saveUninitialized: false,
   })
-  
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser((user, done) => {
-   
   const key = {
     id: user._id,
     type: user instanceof Client ? "client" : "user",
@@ -207,7 +206,6 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (key, done) => {
-  
   let user;
   if (key.type === "client") {
     user = await Client.findById(key.id);
@@ -236,9 +234,7 @@ passport.use(
         if (!user) {
           return done(null, false, {
             message: "No account found. Please sign up.",
-            
           });
-      
         }
 
         done(null, user);
@@ -343,7 +339,9 @@ passport.use(
 
 app.get(
   "/auth/google/freelancer/login",
-  passport.authenticate("google-freelancer-login", { scope: ["profile", "email"] })
+  passport.authenticate("google-freelancer-login", {
+    scope: ["profile", "email"],
+  })
 );
 
 app.get("/failedFreelancerSignIn", (req, res) => {
@@ -393,52 +391,62 @@ app.get("/failedFreelancerSignIn", (req, res) => {
 
 app.get(
   "/auth/google/freelancer/login/callback",
-  passport.authenticate("google-freelancer-login", {failureRedirect: '/failedFreelancerSignIn', failureMessage: true }), 
+  passport.authenticate("google-freelancer-login", {
+    failureRedirect: "/failedFreelancerSignIn",
+    failureMessage: true,
+  }),
   function (req, res) {
-    const message = req.user 
-    ? { status: "success", message: "Successful login", user: req.user }
-    : { status: "failure", message: "Login failed. Please Create an Account" }
+    const message = req.user
+      ? { status: "success", message: "Successful login", user: req.user }
+      : {
+          status: "failure",
+          message: "Login failed. Please Create an Account",
+        };
 
-       const script = `
+    const script = `
        <script>
        window.opener.postMessage(${JSON.stringify(message)}, "*");
        window.close();
        </script>
        `;
 
-
-       res.send(script)
-    }    
-)
+    res.send(script);
+  }
+);
 
 // freelancer successful google sign up auth
 
 app.get(
   "/auth/google/freelancer/signup",
-  passport.authenticate("google-freelancer-signup", { scope: ["profile", "email"] })
+  passport.authenticate("google-freelancer-signup", {
+    scope: ["profile", "email"],
+  })
 );
 
 app.get(
   "/auth/google/freelancer/signup/callback",
   passport.authenticate("google-freelancer-signup"),
   function (req, res) {
-    const message = req.user 
-    ? { status: "success", message: "Account created successfully!", user: req.user }
-    : { status: "failure", message: "Signup failed. Please try again"}
-    
+    const message = req.user
+      ? {
+          status: "success",
+          message: "Account created successfully!",
+          user: req.user,
+        }
+      : { status: "failure", message: "Signup failed. Please try again" };
 
-       const script = `
+    const script = `
        <script>
        window.opener.postMessage(${JSON.stringify(message)}, "*");
        window.close();
        </script>
        `;
 
-       console.log('message', message)
+    console.log("message", message);
 
-       res.send(script)
-    } 
-) 
+    res.send(script);
+  }
+); 
 
 app.get("/failedClientSignIn", (req, res) => {
   res.status(200).send(`
@@ -496,24 +504,28 @@ app.get(
 
 app.get(
   "/auth/google/client/login/callback",
-  passport.authenticate("google-client-login", { failureRedirect: "/failedClientSignIn", failureMessage: true }),
+  passport.authenticate("google-client-login", {
+    failureRedirect: "/failedClientSignIn",
+    failureMessage: true,
+  }),
   function (req, res) {
-    const message = req.user 
-    ? { status: "success", message: "Successful login", user: req.user }
-    : { status: "failure", message: "Login failed. Please Create an Account" };
-    
+    const message = req.user
+      ? { status: "success", message: "Successful login", user: req.user }
+      : {
+          status: "failure",
+          message: "Login failed. Please Create an Account",
+        };
 
-       const script = `
+    const script = `
        <script>
        window.opener.postMessage(${JSON.stringify(message)}, "*");
        window.close();
        </script>
        `;
-      
-       console.log('message', message)
 
-       res.send(script)
-    
+    console.log("message", message);
+
+    res.send(script);
   }
 );
 
@@ -528,177 +540,185 @@ app.get(
   "/auth/google/client/signup/callback",
   passport.authenticate("google-client-signup"),
   function (req, res) {
-    const message = req.user 
-    ? { status: "success", message: "Account created successfully!", user: req.user }
-    : { status: "failure", message: "Signup failed. Please try again"}
+    const message = req.user
+      ? {
+          status: "success",
+          message: "Account created successfully!",
+          user: req.user,
+        }
+      : { status: "failure", message: "Signup failed. Please try again" };
 
-       const script = `
+    const script = `
        <script>
        window.opener.postMessage(${JSON.stringify(message)}, "*");
        window.close();
        </script>
        `;
 
-       console.log('message', message)
+    console.log("message", message);
 
-       res.send(script)
-    } 
-) 
+    res.send(script);
+  }
+); 
 
 
 // successful oauth sesh
 
 app.get("/auth/user", (req, res) => {
-    if (req.user) {
-      res.json({ user: req.user });
-    } else {
-      res.status(401).send('Unauthenticated');
-    }
-  });
+  if (req.user) {
+    res.json({ user: req.user });
+  } else {
+    res.status(401).send("Unauthenticated");
+  }
+});
 
 
 app.get("/user", async (req, res) => {
-    try {
-        const returnedUsers = await User.find();
-        res.send(returnedUsers)
-    } catch (error) {
-        res.status(500).send(error);
-    }
-} 
-)
+  try {
+    const returnedUsers = await User.find();
+    res.send(returnedUsers);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
   
 
-app.get('/profile', async (req, res) => {
-    const userId = req.query.userId
-    try {
-        const query = { client_user_id: userId }
-        const user = await Client.findOne(query)
-       return res.send(user)
-    } catch(err) {
-        console.log("profile endpoint error", err);
-    }
-})
+app.get("/profile", async (req, res) => {
+  const userId = req.query.userId;
+  try {
+    const query = { client_user_id: userId };
+    const user = await Client.findOne(query);
+    return res.send(user);
+  } catch (err) {
+    console.log("profile endpoint error", err);
+  }
+});
 
 
-app.get('/freelancerprofile', async (req, res) => {
-    const userId = req.query.userId
-    try {
-        const query = { user_id: userId }
-        const user = await User.findOne(query)
-       return res.send(user)
-       console.log(user)
-    } catch(err) {
-        console.log("profile endpoint error", err);
-    }
-})
+app.get("/freelancerprofile", async (req, res) => {
+  const userId = req.query.userId;
+  try {
+    const query = { user_id: userId };
+    const user = await User.findOne(query);
+    return res.send(user);
+    console.log(user);
+  } catch (err) {
+    console.log("profile endpoint error", err);
+  }
+});
 
 
 
 app.get("/clientuser", async (req, res) => {
-    try {
-        const returnedClientUsers = await Client.find();
-        res.send(returnedClientUsers)
-    } catch (error) {
-        res.status(500).send(error);
-    }
-} 
-)
+  try {
+    const returnedClientUsers = await Client.find();
+    res.send(returnedClientUsers);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
 
 
 // when a freelancer creates profile
 
 app.put("/user", async (req, res) => {
-    const formData = req.body.formData
+  const formData = req.body.formData;
 
-    try {
-       const foundUser = await User.findOne({ user_id: formData.user_id })
-       console.log(foundUser)
+  try {
+    const foundUser = await User.findOne({ user_id: formData.user_id });
 
-       if (foundUser) {
-        const updateDoc = {
-            $set: {
-                first_name: formData.first_name,
-                last_name: formData.last_name,
-                job_title: formData.job_title,
-                rate: formData.rate,
-                novice: formData.novice,
-                skilled: formData.skilled,
-                expert: formData.expert,
-                url: formData.url,
-                about: formData.about,
-                country: formData.country,
-                region: formData.region
-            }
-        }
-        const updatedUser = await User.findOneAndUpdate( { user_id: formData.user_id }, updateDoc, { new: true })
-        res.send(updatedUser)
-        return
-       } else {
-        res.status(404).send('User not found')
-        return
-       }
-        
-    } catch(err) {
-        console.log(err);
-    } 
-
-})
+    if (foundUser) {
+      const updateDoc = {
+        $set: {
+          first_name: formData.first_name,
+          last_name: formData.last_name,
+          job_title: formData.job_title,
+          rate: formData.rate,
+          novice: formData.novice,
+          skilled: formData.skilled,
+          expert: formData.expert,
+          url: formData.url,
+          about: formData.about,
+          country: formData.country,
+          region: formData.region,
+        },
+      };
+      const updatedUser = await User.findOneAndUpdate(
+        { user_id: formData.user_id },
+        updateDoc,
+        { new: true }
+      );
+      res.send(updatedUser);
+      return;
+    } else {
+      res.status(404).send("User not found");
+      return;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 // when a client creates profile
 
 app.put("/clientuser", async (req, res) => {
-    const clientForm = req.body.clientForm
+  const clientForm = req.body.clientForm;
 
-    try {
-       const foundClient = await Client.findOne({ client_user_id: clientForm.client_user_id })
+  try {
+    const foundClient = await Client.findOne({
+      client_user_id: clientForm.client_user_id,
+    });
 
-       if (foundClient) {
-        const updateClientDoc = {
-            $set: {
-                client_first_name: clientForm.client_first_name,
-                client_last_name: clientForm.client_last_name,
-                client_talent: clientForm.client_talent,
-                client_rate: clientForm.client_rate,
-                client_experience: clientForm.client_experience,
-                client_url: clientForm.client_url,
-                client_about: clientForm.client_about,
-                client_country: clientForm.client_country,
-                client_region: clientForm.client_region,
-            }
-        }
-        const updatedClient = await Client.findOneAndUpdate( { client_user_id: clientForm.client_user_id }, updateClientDoc, { new: true })
-        res.send(updatedClient)
-        return
-       } else {
-        res.status(404).send('User not found')
-        return
-       }
-        
-    } catch(err) {
-        console.log(err);
-    } 
-
-})
+    if (foundClient) {
+      const updateClientDoc = {
+        $set: {
+          client_first_name: clientForm.client_first_name,
+          client_last_name: clientForm.client_last_name,
+          client_talent: clientForm.client_talent,
+          client_rate: clientForm.client_rate,
+          client_experience: clientForm.client_experience,
+          client_url: clientForm.client_url,
+          client_about: clientForm.client_about,
+          client_country: clientForm.client_country,
+          client_region: clientForm.client_region,
+        },
+      };
+      const updatedClient = await Client.findOneAndUpdate(
+        { client_user_id: clientForm.client_user_id },
+        updateClientDoc,
+        { new: true }
+      );
+      res.send(updatedClient);
+      return;
+    } else {
+      res.status(404).send("User not found");
+      return;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 // retrieving the liked freelancer objects
 
-app.get('/freelancerconnects', async (req, res) => {
-    const userIds = JSON.parse(req.query.userIds);
-    console.log(userIds);
+app.get("/freelancerconnects", async (req, res) => {
+  const userIds = JSON.parse(req.query.userIds);
 
-    try {
-        if (userIds.length === 0) {
-            res.status(400).send({ error: 'userIds array is empty.' });
-            return;
-        }
-        const likedFreelancers = await User.find({ 'user_id': { '$in': userIds } });
-        res.status(200).send(likedFreelancers);
-    } catch(err) {
-        console.log(err);
-        res.status(500).send({ err: 'An error occured while fetching the liked freelancers.' })
+  try {
+    if (userIds.length === 0) {
+      res.status(400).send({ error: "userIds array is empty." });
+      return;
     }
-})
+    const likedFreelancers = await User.find({ user_id: { $in: userIds } });
+    res.status(200).send(likedFreelancers);
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .send({ err: "An error occured while fetching the liked freelancers." });
+  }
+});
 
 // retrieving the liked client objects
 
@@ -744,49 +764,49 @@ app.put("/addLikedClients", async (req, res) => {
 
 // removing a client from the liked array
 app.patch("/removeLikedClients", async (req, res) => {
-    const { userId, clientId } = req.body;
-    try {
-        const query = { user_id: userId };
-        const updateDoc = {
-            $pull: { connects: { user_id: clientId } },
-        };
-        const user = await User.findOneAndUpdate(query, updateDoc, { new: true });
-        return res.send(user)
-    } catch (error) {
-        console.log(error)
-    }
-})
+  const { userId, clientId } = req.body;
+  try {
+    const query = { user_id: userId };
+    const updateDoc = {
+      $pull: { connects: { user_id: clientId } },
+    };
+    const user = await User.findOneAndUpdate(query, updateDoc, { new: true });
+    return res.send(user);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // removing a freelancer from the liked array
 
-app.patch('/removeLikedFreelancers', async(req, res) => {
-    const { userId, freelancerId } = req.body;
-    try {
-        const query = { client_user_id: userId };
-        const updateDoc = {
-            $pull: { client_connects: { client_user_id: freelancerId } }
-        };
-        const user = await Client.findOneAndUpdate(query, updateDoc, { new: true });
-        return res.send(user);
-    } catch (error) {
-        console.log(error)
-    }
-})
+app.patch("/removeLikedFreelancers", async (req, res) => {
+  const { userId, freelancerId } = req.body;
+  try {
+    const query = { client_user_id: userId };
+    const updateDoc = {
+      $pull: { client_connects: { client_user_id: freelancerId } },
+    };
+    const user = await Client.findOneAndUpdate(query, updateDoc, { new: true });
+    return res.send(user);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // removing a freelancer from the disliked array
-app.patch('/deleteDisliked', async (req, res) => {
-    const { userId, dislikedFreelancerId } = req.body;
-    try {
-        const query = { client_user_id: userId }
-        const updateDoc = {
-            $pull: { disliked: { client_user_id: dislikedFreelancerId } }
-        }
-        const user = await Client.findOneAndUpdate(query, updateDoc, { new: true });
-        return res.send(user);
-    } catch (error) {
-        console.log(error)
-    }
-})
+app.patch("/deleteDisliked", async (req, res) => {
+  const { userId, dislikedFreelancerId } = req.body;
+  try {
+    const query = { client_user_id: userId };
+    const updateDoc = {
+      $pull: { disliked: { client_user_id: dislikedFreelancerId } },
+    };
+    const user = await Client.findOneAndUpdate(query, updateDoc, { new: true });
+    return res.send(user);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // removing a client from the disliked array
 app.patch("/deleteDislikedClient", async (req, res) => {
@@ -805,112 +825,107 @@ app.patch("/deleteDislikedClient", async (req, res) => {
 
 // unmatching clients
 
-app.patch('/unmatchClient', async (req, res) => {
-    const { loggedInId, id } = req.body;
+app.patch("/unmatchClient", async (req, res) => {
+  const { loggedInId, id } = req.body;
 
-    try {
-        const query = { user_id: loggedInId }
-        const updateDoc = {
-            $pull: { connects: { user_id: id } },
-            $push: { unmatched: { user_id: id } }
-        };
-        const user = await User.findOneAndUpdate(query, updateDoc, { new: true });
-        return res.send(user);
-    } catch (error) {
-        console.log('error unmatching with clients', error);
-    }
-})
+  try {
+    const query = { user_id: loggedInId };
+    const updateDoc = {
+      $pull: { connects: { user_id: id } },
+      $push: { unmatched: { user_id: id } },
+    };
+    const user = await User.findOneAndUpdate(query, updateDoc, { new: true });
+    return res.send(user);
+  } catch (error) {
+    console.log("error unmatching with clients", error);
+  }
+});
 
 // unmatching freelancers
 
-app.patch('/unmatchFreelancer', async (req, res) => {
-    const { loggedInId, id } = req.body;
-    
-    
-    try {
-        const query = { client_user_id: loggedInId }
-        const updateDoc = {
-            $pull: { client_connects: { client_user_id: id } },
-            $push: { unmatched: { client_user_id: id } }
-        };
-      const user = await Client.findOneAndUpdate(query, updateDoc, { new: true });
-      return res.send(user);
-  
-      } catch (error) {
-        console.log('error unmatching with freelancer', error);
-    } 
-  });
+app.patch("/unmatchFreelancer", async (req, res) => {
+  const { loggedInId, id } = req.body;
+
+  try {
+    const query = { client_user_id: loggedInId };
+    const updateDoc = {
+      $pull: { client_connects: { client_user_id: id } },
+      $push: { unmatched: { client_user_id: id } },
+    };
+    const user = await Client.findOneAndUpdate(query, updateDoc, { new: true });
+    return res.send(user);
+  } catch (error) {
+    console.log("error unmatching with freelancer", error);
+  }
+});
 
 //   getting all the unmatched freelancers
 
-app.get('/getUnmatchedFreelancers', async (req, res) => {
-    const { userId } = req.query;
-    
-    try {
-        const client = await Client.findOne({ client_user_id: userId })
-        const unmatchedFreelancers = client.unmatched;
-        res.send(unmatchedFreelancers)
-    } catch (error) {
-        console.log(error)
-    }
-})
+app.get("/getUnmatchedFreelancers", async (req, res) => {
+  const { userId } = req.query;
+
+  try {
+    const client = await Client.findOne({ client_user_id: userId });
+    const unmatchedFreelancers = client.unmatched;
+    res.send(unmatchedFreelancers);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // getting all the unmatched clients
 
-app.get('/getUnmatchedClients', async (req, res) => {
-    const { userId } = req.query;
+app.get("/getUnmatchedClients", async (req, res) => {
+  const { userId } = req.query;
 
-    try {
-        const freelancer = await User.findOne({ user_id: userId })
-        const unmatchedClients = freelancer.unmatched;
-        res.send(unmatchedClients)
-    } catch (error) {
-        console.log(error)
-    }
-})
+  try {
+    const freelancer = await User.findOne({ user_id: userId });
+    const unmatchedClients = freelancer.unmatched;
+    res.send(unmatchedClients);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // putting the liked freelancers' userid in the client_connects array, which is the liked array.
 
-app.put('/addConnect', async (req, res) => {
-   const {userId, likedFreelancerIds} = req.body;
+app.put("/addConnect", async (req, res) => {
+  const { userId, likedFreelancerIds } = req.body;
 
-   try {
-    const query = {client_user_id: userId}
+  try {
+    const query = { client_user_id: userId };
     const updateDoc = {
-        $addToSet: { client_connects: { client_user_id: likedFreelancerIds} },
-    }
+      $addToSet: { client_connects: { client_user_id: likedFreelancerIds } },
+    };
 
-    const user = await Client.updateOne(query, updateDoc)
-    res.send(user)
-   } catch(error) {
-    console.log(error)
-   }
-})
+    const user = await Client.updateOne(query, updateDoc);
+    res.send(user);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // disliking freelancers
 
-app.put('/addDislikedFreelancer', async (req, res) => {
-    const {userId, dislikedFreelancerId} = req.body;
-    console.log('dislikedFreelancerId', dislikedFreelancerId)
+app.put("/addDislikedFreelancer", async (req, res) => {
+  const { userId, dislikedFreelancerId } = req.body;
 
-    try {
-        const query = {client_user_id: userId}
-        const updateDoc = {
-            $addToSet: { disliked: { client_user_id: dislikedFreelancerId } },
-        }
-        const user = await Client.updateOne(query, updateDoc)
-        res.send(user)
-
-    } catch (error) {
-        console.log(error)
-    }
-})
+  try {
+    const query = { client_user_id: userId };
+    const updateDoc = {
+      $addToSet: { disliked: { client_user_id: dislikedFreelancerId } },
+    };
+    const user = await Client.updateOne(query, updateDoc);
+    res.send(user);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // disliking clients
 
 app.put("/addDislikedClient", async (req, res) => {
   const { userId, dislikedClientId } = req.body;
-  console.log("dislikedClientId", dislikedClientId);
 
   try {
     const query = { user_id: userId };
@@ -937,7 +952,6 @@ app.post("/messages", async (req, res) => {
     receiverImg,
   } = req.body;
   const timestamp = Date.now();
-  
 
   try {
     const query = {
@@ -962,15 +976,12 @@ app.post("/messages", async (req, res) => {
 // fetching messages
 
 app.get("/messages", async (req, res) => {
-  const {
-    senderId,
-    receiverId,
-  } = req.query;
+  const { senderId, receiverId } = req.query;
 
   try {
     const signedInClientmessages = await Message.find({
       senderId: senderId,
-      receiverId: receiverId
+      receiverId: receiverId,
     }).exec();
     const freelancerMessages = await Message.find({
       senderId: receiverId,

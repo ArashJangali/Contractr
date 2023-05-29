@@ -1,9 +1,15 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import Message from "./Message";
-import MessageInput from "./MessageInput"
+import MessageInput from "./MessageInput";
 
-function ChatTab({clickedFreelancer, user, messageVisible, clickedClient, isFreelancer}) {
+function ChatTab({
+  clickedFreelancer,
+  user,
+  messageVisible,
+  clickedClient,
+  isFreelancer,
+}) {
   return (
     <>
       <MessageInput

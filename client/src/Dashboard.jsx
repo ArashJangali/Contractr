@@ -17,7 +17,6 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CancelIcon from "@mui/icons-material/Cancel";
 import UnmatchButton from "./UnMatchButton";
-import { UserTypeContext } from './UserTypeContext';
 
 function Dashboard({ people }) {
   const [user, setUser] = useState([]);
@@ -34,17 +33,20 @@ function Dashboard({ people }) {
   const [unmatchedFreelancers, setUnmatchedFreelancers] = useState([]);
   const [likeClicked, setLikeClicked] = useState(false);
   const [dislikeClicked, setDislikeClicked] = useState(false);
-  const { setUserType } = useContext(UserTypeContext)
+  const [client, setClient] = useState(null);
 
-
-
+  useEffect(() => {
+    if (user?.client_user_id) {
+      setClient(true);
+    }
+  }, [user]);
 
   function handleUndoClick() {
     setUndoClicked(true);
   }
 
   function handleLikeClick() {
-    setLikeClicked(true)
+    setLikeClicked(true);
   }
 
   function handleDislikeClick() {
@@ -69,7 +71,6 @@ function Dashboard({ people }) {
     }
   };
 
-
   useEffect(() => {
     getUser();
   }, []);
@@ -79,90 +80,97 @@ function Dashboard({ people }) {
 
   const [like, setLike] = useState(null);
 
- 
   return (
-    <div>
-      <div className="centerMain">
-        <ChatToggle
-          chatActivate={chatActivate}
-          setChatActivate={setChatActivate}
-        />
-        <MessageToggle
-          messageActivate={messageActivate}
-          setMessageActivate={setMessageActivate}
-        />
-        <div className="chat-message-container">
-          <Chat
-            removeCookie={removeCookie}
-            cookies={cookies}
-            user={user}
-            isClient={isClient}
-            visible={chatActivate || thumbs}
-            clickedFreelancer={clickedFreelancer}
-            setClickedFreelancer={setClickedFreelancer}
-            messageClicked={messageClicked}
-            setSelectedPerson={setSelectedPerson}
-            selectedPerson={selectedPerson}
-            unmatchedFreelancers={unmatchedFreelancers}
-          />
-
-          <Message
-            messageVisible={messageActivate || messageClicked}
-            removeCookie={removeCookie}
-            cookies={cookies}
-            user={user}
-            isClient={isClient}
-            clickedFreelancer={clickedFreelancer}
-          />
-        </div>
-
-        <div className="main">
-          <Engagement
-            setThumbs={setThumbs}
-            thumbs={thumbs}
-            messageClicked={messageClicked}
-            setMessageClicked={setMessageClicked}
+    client && (
+      <div>
+        <div className="centerMain">
+          <ChatToggle
             chatActivate={chatActivate}
             setChatActivate={setChatActivate}
           />
-          <Contractr
-            getUser={getUser}
-            user={user}
-            like={like}
-            setUndoClicked={setUndoClicked}
-            undoClicked={undoClicked}
-            setLikeClicked={setLikeClicked}
-            likeClicked={likeClicked}
-            setDislikeClicked={setDislikeClicked}
-            dislikeClicked={dislikeClicked}
-            
+          <MessageToggle
+            messageActivate={messageActivate}
+            setMessageActivate={setMessageActivate}
           />
-          <div className="mainButtons">
-            <IconButton onClick={handleLikeClick} style={{ color: "#F44336" }}>
-              <FavoriteIcon fontSize="large" />
-            </IconButton>
-            <IconButton onClick={handleDislikeClick} style={{ color: "#757575" }}>
-              <CancelIcon fontSize="large" />
-            </IconButton>
-            <IconButton onClick={handleUndoClick} style={{ color: "#2196F3" }}>
-              <UndoIcon fontSize="large" />
-            </IconButton>
-            <UnmatchButton
-              thumbs={thumbs}
-              unmatchedFreelancers={unmatchedFreelancers}
-              setUnmatchedFreelancers={setUnmatchedFreelancers}
+          <div className="chat-message-container">
+            <Chat
+              removeCookie={removeCookie}
+              cookies={cookies}
               user={user}
               isClient={isClient}
+              visible={chatActivate || thumbs}
+              clickedFreelancer={clickedFreelancer}
+              setClickedFreelancer={setClickedFreelancer}
+              messageClicked={messageClicked}
+              setSelectedPerson={setSelectedPerson}
               selectedPerson={selectedPerson}
+              unmatchedFreelancers={unmatchedFreelancers}
+            />
+
+            <Message
+              messageVisible={messageActivate || messageClicked}
+              removeCookie={removeCookie}
+              cookies={cookies}
+              user={user}
+              isClient={isClient}
+              clickedFreelancer={clickedFreelancer}
             />
           </div>
-          <Preference
-            isClient={true}
-          />
+
+          <div className="main">
+            <Engagement
+              setThumbs={setThumbs}
+              thumbs={thumbs}
+              messageClicked={messageClicked}
+              setMessageClicked={setMessageClicked}
+              chatActivate={chatActivate}
+              setChatActivate={setChatActivate}
+            />
+            <Contractr
+              getUser={getUser}
+              user={user}
+              like={like}
+              setUndoClicked={setUndoClicked}
+              undoClicked={undoClicked}
+              setLikeClicked={setLikeClicked}
+              likeClicked={likeClicked}
+              setDislikeClicked={setDislikeClicked}
+              dislikeClicked={dislikeClicked}
+            />
+            <div className="mainButtons">
+              <IconButton
+                onClick={handleLikeClick}
+                style={{ color: "#F44336" }}
+              >
+                <FavoriteIcon fontSize="large" />
+              </IconButton>
+              <IconButton
+                onClick={handleDislikeClick}
+                style={{ color: "#757575" }}
+              >
+                <CancelIcon fontSize="large" />
+              </IconButton>
+              <IconButton
+                onClick={handleUndoClick}
+                style={{ color: "#2196F3" }}
+              >
+                <UndoIcon fontSize="large" />
+              </IconButton>
+              <UnmatchButton
+                thumbs={thumbs}
+                unmatchedFreelancers={unmatchedFreelancers}
+                setUnmatchedFreelancers={setUnmatchedFreelancers}
+                user={user}
+                isClient={isClient}
+                selectedPerson={selectedPerson}
+              />
+            </div>
+            <Preference isClient={true} />
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
-    </div>
+    )
   );
 }
 

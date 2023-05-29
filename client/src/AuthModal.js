@@ -3,33 +3,34 @@ import axios from "./axios.js";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import ChatHeader from "./ChatHeader";
-import { FaGoogle } from 'react-icons/fa';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
-import colorLogo from "./logo-images/logo-color.png"
-import { UserTypeContext } from './UserTypeContext';
+import { FaGoogle } from "react-icons/fa";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import colorLogo from "./logo-images/logo-color.png";
 
-
-const AuthModal = ({ setShowAuthModal, isSignUp, client, freelancer, showAuthModal }) => {
+const AuthModal = ({
+  setShowAuthModal,
+  isSignUp,
+  client,
+  freelancer,
+  showAuthModal,
+}) => {
   const [url, setUrl] = useState(null);
   const [name, setName] = useState(null);
 
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [googleAuth, setGoogleAuth] = useState(false);
   const [showPages, setShowPages] = useState(false);
-  const { setUserType } = useContext(UserTypeContext)
 
   let navigate = useNavigate();
-
 
   function handleClick() {
     setShowAuthModal(false);
   }
 
- 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -74,7 +75,6 @@ const AuthModal = ({ setShowAuthModal, isSignUp, client, freelancer, showAuthMod
           navigate("/dashboard", { state: { client: true } });
 
         if (success && !isSignUp && freelancer) {
-        console.log('freelancer', freelancer)
           navigate("/clientdashboard", { state: { freelancer: true } });
         }
 
@@ -82,8 +82,6 @@ const AuthModal = ({ setShowAuthModal, isSignUp, client, freelancer, showAuthMod
       } catch (error) {
         console.log("error in axios request", error);
       }
-
-      //     const response = await axios.post(`/${isSignUp ? 'clientsignup' : 'clientlogin'}`, {email, password})
     } catch (error) {
       console.log(error);
       if (error.response) {
@@ -138,21 +136,18 @@ const AuthModal = ({ setShowAuthModal, isSignUp, client, freelancer, showAuthMod
         event.data.message === "Login failed. Please press 'CREATE ACCOUNT'"
       ) {
         setError("Login failed. Please Create an Account.");
-        
       } else {
         setError("Login failed. Please Create an Account.");
-        
       }
     }
 
     window.addEventListener("message", handleMessage);
-    
+
     return () => {
       window.removeEventListener("message", handleMessage);
     };
   }, []);
 
-  
   return (
     <div className="authModal">
       <div className="cross" onClick={handleClick}>
@@ -198,7 +193,7 @@ const AuthModal = ({ setShowAuthModal, isSignUp, client, freelancer, showAuthMod
           <FaGoogle className="google-icon" />{" "}
           {isSignUp ? "Sign Up With Google" : "Sign In With Google"}
         </button>
-        {error && (<p style={{marginTop: "10px"}}>{error}</p>)}
+        {error && <p style={{ marginTop: "10px" }}>{error}</p>}
       </form>
     </div>
   );

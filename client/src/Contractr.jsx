@@ -16,7 +16,7 @@ function Contractr({
   setLikeClicked,
   likeClicked,
   setDislikeClicked,
-  dislikeClicked
+  dislikeClicked,
 }) {
   const [lastDirection, setLastDirection] = useState(null);
   const [swipedCards, setSwipedCards] = useState([]);
@@ -83,7 +83,7 @@ function Contractr({
     if (direction === "up") {
       functionLikeFreelancer(likedFreelancerIds);
     }
-   
+
     setLastDirection(direction);
     updateCurrentIndex(index - 1);
     setSwipedCards((prevSwipedCards) => [
@@ -107,7 +107,8 @@ function Contractr({
     );
   };
 
-  const dislikedFreelancerIds = user?.disliked?.map(({ client_user_id }) => client_user_id) ?? [];
+  const dislikedFreelancerIds =
+    user?.disliked?.map(({ client_user_id }) => client_user_id) ?? [];
 
   const notLikedFreelancers = people?.filter(
     (person) =>
@@ -137,18 +138,17 @@ function Contractr({
 
           const dislikedFreelancerId =
             filteredNotLikedFreelancers[currentIndex]?.user_id;
-            console.log(dislikedFreelancerId)
-          await axios.put('/addDislikedFreelancer', {
+          console.log(dislikedFreelancerId);
+          await axios.put("/addDislikedFreelancer", {
             userId,
-            dislikedFreelancerId
-          })
-          setLastDirection('down');
+            dislikedFreelancerId,
+          });
+          setLastDirection("down");
           updateCurrentIndex(currentIndex - 1);
-          setSwipedCards((prevSwipedCards) =>[
-            ...prevSwipedCards, 
-            { index: currentIndex, freelancerId: dislikedFreelancerId }
-          ])
-         
+          setSwipedCards((prevSwipedCards) => [
+            ...prevSwipedCards,
+            { index: currentIndex, freelancerId: dislikedFreelancerId },
+          ]);
         } catch (error) {
           console.log(error);
         }
@@ -160,31 +160,30 @@ function Contractr({
 
   // like button clicked
 
-  useEffect(() =>{
-    if(likeClicked) {
+  useEffect(() => {
+    if (likeClicked) {
       async function handleLike() {
         try {
           if (!activeSwipe) return;
 
-          const likedFreelancerIds = filteredNotLikedFreelancers[currentIndex]?.user_id;
+          const likedFreelancerIds =
+            filteredNotLikedFreelancers[currentIndex]?.user_id;
           await functionLikeFreelancer(likedFreelancerIds);
-          setLastDirection('up');
+          setLastDirection("up");
           updateCurrentIndex(currentIndex - 1);
           setSwipedCards((prevSwipedCards) => [
-            ...prevSwipedCards, 
-            { index: currentIndex, freelancerId: likedFreelancerIds }
-          ])
-
-        } catch(error) {
-          console.log(error)
+            ...prevSwipedCards,
+            { index: currentIndex, freelancerId: likedFreelancerIds },
+          ]);
+        } catch (error) {
+          console.log(error);
         }
       }
 
       handleLike();
       setLikeClicked(false);
     }
-  }, [likeClicked, swipedCards, undoClicked])
-
+  }, [likeClicked, swipedCards, undoClicked]);
 
   // the undo button is clicked
 

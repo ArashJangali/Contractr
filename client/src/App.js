@@ -8,17 +8,14 @@ import { useCookies } from "react-cookie";
 import ClientOnBoarding from "./clientOnboarding";
 import ClientDashboard from "./ClientDashboard";
 import axios from "./axios";
-import { useEffect, useState, useContext } from 'react';
-import { UserTypeContext } from './UserTypeContext';
-
-
+import { useEffect, useState, useContext } from "react";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["userId"]);
   const [userId, setUserId] = useState(null);
-  const [userType, setUserType] = useState(null);
 
-
+  const [client, setClient] = useState(false);
+  const [freelancer, setFreelancer] = useState(false);
 
   useEffect(() => {
     const getUser = async () => {
@@ -34,30 +31,50 @@ function App() {
 
   const authToken = cookies.AuthToken;
 
-console.log('userType', userType)
-
   return (
-    <UserTypeContext.Provider value={{ userType, setUserType }}>
     <div className="app">
       <BrowserRouter>
         <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                freelancer={freelancer}
+                setFreelancer={setFreelancer}
+                setClient={setClient}
+                client={client}
+              />
+            }
+          />
 
-          <Route path="/" element={<Home />} />
-
-          {(authToken || userId) && "client" && <Route path="/dashboard" element={<Dashboard />} />}
-
-          {(authToken || userId) && "freelancer" && (
-            <Route path="/clientdashboard" element={<ClientDashboard />} />
+          {(authToken || userId) && (
+            <Route path="/dashboard" element={<Dashboard />} />
           )}
 
-          {(authToken || userId) && "freelancer" && <Route path="/onboarding" element={<OnBoarding />} />}
+          {(authToken || userId) && (
+            <Route
+              path="/clientdashboard"
+              element={
+                <ClientDashboard
+                  freelancer={freelancer}
+                  setFreelancer={setFreelancer}
+                />
+              }
+            />
+          )}
+
+          {(authToken || userId) && (
+            <Route
+              path="/onboarding"
+              element={<OnBoarding freelancer={freelancer} />}
+            />
+          )}
           {(authToken || userId) && "client" && (
             <Route path="/clientonboarding" element={<ClientOnBoarding />} />
           )}
         </Routes>
       </BrowserRouter>
     </div>
-    </UserTypeContext.Provider>
   );
 }
 

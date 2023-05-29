@@ -21,7 +21,6 @@ function Chat({
   unmatchedFreelancers,
   unmatchedClients,
 }) {
-  console.log("chat", isFreelancer);
   return (
     <div className={`chat-container${visible ? " visible" : ""}`}>
       <div className="chat">

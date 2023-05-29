@@ -10,7 +10,8 @@
   margin-left: 30px;
 }
 
-.html, body {
+.html,
+body {
   margin: 0;
   padding: 0;
 }
@@ -48,7 +49,7 @@ nav .btn-primary:hover {
 
 
 .title-primary {
-  font-size:45px;
+  font-size: 45px;
   color: white;
 }
 
@@ -80,20 +81,20 @@ nav .btn-primary:hover {
   display: none;
 }
 
-.user-type input[type=radio] + label {
-  padding:12px;
+.user-type input[type=radio]+label {
+  padding: 12px;
   border-radius: 10px;
   font-size: 30px;
   margin: 0px 32px;
   border: solid 2px rgb(136, 124, 109);
 }
 
-.user-type input[type=radio]:checked + label {
+.user-type input[type=radio]:checked+label {
   background: linear-gradient(270deg, #03011a, #082078);
   color: #ffffff;
 }
 
-.user-type input[type=radio]:hover + label {
+.user-type input[type=radio]:hover+label {
   background: linear-gradient(270deg, #03011a, #082078);
   color: #ffffff;
 }
@@ -134,14 +135,14 @@ body {
 
 .main {
   text-align: center;
-  display:flex;
+  display: flex;
   margin-bottom: 5%;
   justify-content: center;
   box-shadow: rgb(0, 0, 0);
   width: 80%;
   margin-right: 200px !important;
   margin-top: 30px !important;
- 
+
 }
 
 .messageSuccess {
@@ -153,7 +154,7 @@ body {
   color: rgb(183, 213, 223);
   padding: 8px 16px;
   border-radius: 10px;
-  background-color:  rgba(42, 34, 22, 0.386);
+  background-color: rgba(42, 34, 22, 0.386);
   width: 300px;
   height: 120px;
   border-bottom: 2px solid lightBlue;
@@ -172,7 +173,7 @@ body {
   color: rgb(183, 213, 223);
   padding: 8px 16px;
   border-radius: 10px;
-  background-color:  rgba(42, 34, 22, 0.386);
+  background-color: rgba(42, 34, 22, 0.386);
   width: 300px;
   height: 120px;
   border-bottom: 2px solid lightBlue;
@@ -217,13 +218,13 @@ body {
 
 .unmatch-button {
 
-z-index: 1000;
+  z-index: 1000;
 
 }
 
 .messageSuccess.visible p {
   margin-bottom: 3px;
-  
+
   text-align: right;
 }
 
@@ -243,38 +244,38 @@ nav .logo-div .logo {
 }
 
 .navBtn {
-   margin: 10px;
-   color:#082078;
-   background-color: white;
-   font-family: Verdana, Geneva, Tahoma, sans-serif;
-   font-size: 20px;
-   padding: 10px 15px;
-   border-radius: 10px;
-   border: none;
-   width: 100px;
-   height: 50px;
+  margin: 10px;
+  color: #082078;
+  background-color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  width: 100px;
+  height: 50px;
 }
 
 .navBtn:disabled {
   background-color: rgb(197, 197, 197);
-  color:#03175d;
+  color: #03175d;
 }
 
 .viewportHome {
   width: 100vw;
   height: 100vh;
   position: fixed;
-  background-image: linear-gradient( rgba(0, 0, 0, 0.498), rgba(0, 0, 0, 0.504) ), url("/Users/arashjangali/Desktop/Web Development/React/contractr/client/src/logo-images/Screenshot 2023-04-11 at 03.44.23.png");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.498), rgba(0, 0, 0, 0.504)), url("/Users/arashjangali/Desktop/Web Development/React/contractr/client/src/logo-images/Screenshot 2023-04-11 at 03.44.23.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size:cover;
+  background-size: cover;
 }
 
 
 .footer {
   width: 100%;
   height: 50px;
-  position:absolute;
+  position: absolute;
   text-align: center;
   color: #848484a4;
   bottom: 10px;
@@ -300,7 +301,7 @@ nav .logo-div .logo {
   justify-content: center;
   width: 650px;
   height: auto;
-  position:relative;
+  position: relative;
   border-radius: 20px;
   z-index: 10;
 }
@@ -353,14 +354,14 @@ nav .logo-div .logo {
 }
 
 .card h2 {
-  position:absolute;
+  position: absolute;
   color: white;
   bottom: 43px;
   margin: 10px;
 }
 
 .card h4 {
-  position:absolute;
+  position: absolute;
   color: white;
   bottom: 22px;
   margin: 10px;
@@ -369,7 +370,7 @@ nav .logo-div .logo {
 
 
 .card p {
-  position:absolute;
+  position: absolute;
   color: white;
   bottom: 0px;
   margin: 10px;
@@ -409,8 +410,8 @@ nav .logo-div .logo {
 
 .authModal h2 {
   position: relative !important;
-top: -14px;
-color: #ffffffc3;
+  top: -14px;
+  color: #ffffffc3;
 }
 
 .authModal form {
@@ -473,10 +474,10 @@ color: #ffffffc3;
   margin-bottom: 8px;
 }
 
-.cross  {
+.cross {
   float: right;
- color: #716aa8;
- padding: 3px;
+  color: #716aa8;
+  padding: 3px;
   margin-top: -15px !important;
   margin-right: -15px !important;
   width: 20px !important;
@@ -545,10 +546,10 @@ color: #ffffffc3;
 }
 
 .experience input[type="radio"] {
-  display:none
+  display: none
 }
 
-input[type="radio"]:checked + label {
+input[type="radio"]:checked+label {
   border: solid 2px rgb(5, 13, 43) !important;
 }
 
@@ -611,11 +612,11 @@ input[type="radio"]:checked + label {
   transition: max-height 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
- 
+
 }
 
 .chat-container.visible {
-  max-height: 900px; 
+  max-height: 900px;
   align-items: center;
   display: flex;
 
@@ -630,9 +631,9 @@ input[type="radio"]:checked + label {
 }
 
 .message-container.visible {
-  max-height: 250px; 
-margin-left: auto;
-margin-right: auto;
+  max-height: 250px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .chat-buttons {
@@ -650,7 +651,7 @@ margin-right: auto;
 }
 
 .chat-buttons:disabled {
-  border-bottom: solid 4px rgb(187,187,187);
+  border-bottom: solid 4px rgb(187, 187, 187);
 }
 
 .chat {
@@ -698,12 +699,12 @@ margin-right: auto;
 }
 
 .chat .chat-buttons:disabled {
-  border-bottom: solid 4px rgb(187,187,187);
+  border-bottom: solid 4px rgb(187, 187, 187);
 }
 
 .icon-logout {
   border-radius: 6px;
-  margin:5px;
+  margin: 5px;
   padding: 5px;
   border: 0px;
   display: flex;
@@ -789,9 +790,9 @@ margin-right: auto;
 .message-input {
   padding: 5px;
   margin-left: 35px;
-align-items: center;
-text-align: center;
-margin-top: -40px;
+  align-items: center;
+  text-align: center;
+  margin-top: -40px;
 }
 
 .connects img {
@@ -804,7 +805,7 @@ margin-top: -40px;
   border-top: solid 4px rgba(7, 1, 87, 0.771);
 }
 
-.message-input .btn-secondary{
+.message-input .btn-secondary {
   margin-left: 50px !important;
   border-left: solid 4px rgba(7, 1, 87, 0.963);
   border-top: solid 4px rgba(7, 1, 87, 0.963);
@@ -814,9 +815,7 @@ margin-top: -40px;
   height: fit-content;
 }
 
-.message-toggle-button-div {
-
-}
+.message-toggle-button-div {}
 
 .message-input textarea {
   border-radius: 10px;
