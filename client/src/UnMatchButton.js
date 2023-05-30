@@ -1,5 +1,5 @@
 import axios from "./axios.js";
-import IconButton from "@mui/material/IconButton";
+import { IconButton } from '@mui/material';
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 import { useState } from "react";
 

@@ -69,7 +69,7 @@ function App() {
               element={<OnBoarding freelancer={freelancer} />}
             />
           )}
-          {(authToken || userId) && "client" && (
+          {(authToken || userId) && (
             <Route path="/clientonboarding" element={<ClientOnBoarding />} />
           )}
         </Routes>

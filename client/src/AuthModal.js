@@ -98,7 +98,7 @@ const AuthModal = ({
   }
   async function googleSignIn() {
     const userType = freelancer ? "freelancer" : "client";
-    const backendUrl = "http://localhost:8001";
+    const backendUrl = "https://contractr.onrender.com";
     const authUrl = isSignUp
       ? `${backendUrl}/auth/google/${userType}/signup`
       : `${backendUrl}/auth/google/${userType}/login`;

@@ -28,7 +28,7 @@ const connection_url = process.env.MONGODB_CONNECTION_URL
 
 // MiddleWares
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'https://contractrapp.onrender.com',
     methods: ['POST', 'GET', 'PUT', 'PATCH', 'DELETE'],
     allowHeaders: ['Content type'],
     credentials: true,
@@ -224,7 +224,7 @@ passport.use(
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
       callbackURL:
-        "http://localhost:8001/auth/google/freelancer/login/callback",
+        "https://contractr.onrender.com/auth/google/freelancer/login/callback",
       passReqToCallback: true,
     },
     async (req, accessToken, refreshToken, profile, done) => {

@@ -12,7 +12,7 @@ import { useCookies } from "react-cookie";
 import MessageToggle from "./messageToggle";
 import Message from "./Message";
 import UndoIcon from "@mui/icons-material/Undo";
-import IconButton from "@mui/material/IconButton";
+import { IconButton } from '@mui/material';
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CancelIcon from "@mui/icons-material/Cancel";
 import UnmatchButton from "./UnMatchButton";

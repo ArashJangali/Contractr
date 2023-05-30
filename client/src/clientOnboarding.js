@@ -17,6 +17,7 @@ const ClientOnBoarding = () => {
   const [user, setUser] = useState([]);
   const [client, setClient] = useState(null);
 
+  // Ensuring that the signed-in user is a client in order to grant them access to view the current component.
   useEffect(() => {
     if (user?.client_user_id) {
       setClient(true);
@@ -49,6 +50,8 @@ const ClientOnBoarding = () => {
     }
   };
 
+// Retrieving the profile information of the currently signed-in user.
+
   const getUser = async () => {
     const rote = "profile";
 
@@ -65,6 +68,8 @@ const ClientOnBoarding = () => {
   useEffect(() => {
     getUser();
   }, []);
+
+
 
   const handleChange = (e) => {
     const value = e.target.value;

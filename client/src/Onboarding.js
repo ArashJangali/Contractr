@@ -17,6 +17,8 @@ const OnBoarding = () => {
   const [user, setUser] = useState([]);
   const [freelancer, setFreelancer] = useState(null);
 
+    // Ensuring that the signed-in user is a freelancer in order to grant them access to view the current component.
+
   useEffect(() => {
     if (user?.user_id) {
       setFreelancer(true);
@@ -35,6 +37,8 @@ const OnBoarding = () => {
     country: "",
     region: "",
   });
+
+  // Retrieving the profile information of the currently signed-in user.
 
   const getUser = async () => {
     const rote = "freelancerprofile";

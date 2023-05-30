@@ -1,7 +1,7 @@
 import MessageIcon from "@mui/icons-material/Message";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import WorkIcon from "@mui/icons-material/Work";
-import IconButton from "@mui/material/IconButton";
+import { IconButton } from '@mui/material';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
