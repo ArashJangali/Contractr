@@ -261,11 +261,12 @@ nav .logo-div .logo {
   color: #03175d;
 }
 
+
 .viewportHome {
   width: 100vw;
   height: 100vh;
   position: fixed;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.498), rgba(0, 0, 0, 0.504)), url("/Users/arashjangali/Desktop/Web Development/React/contractr/client/src/logo-images/Screenshot 2023-04-11 at 03.44.23.png");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.498), rgba(0, 0, 0, 0.504)), url("../public/images/Screenshot_2023-04-11_at_03.44.23.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

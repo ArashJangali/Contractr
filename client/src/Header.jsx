@@ -1,5 +1,4 @@
-import logo from "./logo-images/logo.png";
-import colorLogo from "./logo-images/logo-color.png";
+
 
 function Header({ smallState, setShowAuthModal, showAuthModal, setIsSignUp }) {
   function handleClick() {
@@ -12,7 +11,7 @@ function Header({ smallState, setShowAuthModal, showAuthModal, setIsSignUp }) {
   return (
     <nav>
       <div className="logo-div">
-        <img className="logo" src={smallState ? colorLogo : logo} />
+      <img className="logo" src={smallState ? "/images/logo-color.png" : "/images/logo.png"} alt="logo" />
       </div>
       {!loggedIn && !smallState && (
         <button

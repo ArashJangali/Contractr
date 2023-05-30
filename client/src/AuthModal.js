@@ -5,7 +5,6 @@ import { useCookies } from "react-cookie";
 import ChatHeader from "./ChatHeader";
 import { FaGoogle } from "react-icons/fa";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-import colorLogo from "./logo-images/logo-color.png";
 
 const AuthModal = ({
   setShowAuthModal,
@@ -154,7 +153,7 @@ const AuthModal = ({
         <AiOutlineCloseCircle />
       </div>
       <h2>{isSignUp ? "Create Account" : "Log In"}</h2>
-      <img className="authmodal-img" src={colorLogo} />
+      <img className="authmodal-img" src="/images/logo-color.png" alt="color logo" />
 
       <form
         className={isSignUp ? "sign-up-form" : null}
