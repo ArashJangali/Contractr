@@ -253,7 +253,7 @@ passport.use(
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
       callbackURL:
-        "http://localhost:8001/auth/google/freelancer/signup/callback",
+        "https://contractr.onrender.com/auth/google/freelancer/signup/callback",
       passReqToCallback: true,
     },
     async (req, accessToken, refreshToken, profile, done) => {
@@ -284,7 +284,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "http://localhost:8001/auth/google/client/login/callback",
+      callbackURL: "https://contractr.onrender.com/auth/google/client/login/callback",
       passReqToCallback: true,
     },
     async (req, accessToken, refreshToken, profile, done) => {
@@ -312,7 +312,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "http://localhost:8001/auth/google/client/signup/callback",
+      callbackURL: "https://contractr.onrender.com/auth/google/client/signup/callback",
       passReqToCallback: true,
     },
     async (req, accessToken, refreshToken, profile, done) => {
@@ -997,4 +997,4 @@ app.get("/messages", async (req, res) => {
 });
 
 // Listener
-app.listen(port, () => console.log(`listening on localhost: ${port}`));
+app.listen(port, () => console.log(`listening on: ${port}`));
