@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://contractr.onrender.com",
+  baseURL: "process.env.REACT_APP_BACKEND_URL",
   withCredentials: true,
 });
 

@@ -26,9 +26,12 @@ const app = express();
 const port = process.env.PORT || 8001;
 const connection_url = process.env.MONGODB_CONNECTION_URL
 
+const frontendUrl = process.env.FRONTEND_URL;
+const backendUrl = process.env.BACKEND_URL;
+
 // MiddleWares
 const corsOptions = {
-    origin: 'https://contractrapp.onrender.com',
+    origin: frontendUrl,
     methods: ['POST', 'GET', 'PUT', 'PATCH', 'DELETE'],
     allowHeaders: ['Content type'],
     credentials: true,
@@ -36,6 +39,7 @@ const corsOptions = {
 
 app.use(express.json());
 app.use(Cors(corsOptions));
+
 
 
 // DB Config
@@ -224,7 +228,7 @@ passport.use(
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
       callbackURL:
-        "https://contractr.onrender.com/auth/google/freelancer/login/callback",
+        `${backendUrl}/auth/google/freelancer/login/callback`,
       passReqToCallback: true,
     },
     async (req, accessToken, refreshToken, profile, done) => {
@@ -253,7 +257,7 @@ passport.use(
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
       callbackURL:
-        "https://contractr.onrender.com/auth/google/freelancer/signup/callback",
+      `${backendUrl}/auth/google/freelancer/signup/callback`,
       passReqToCallback: true,
     },
     async (req, accessToken, refreshToken, profile, done) => {
@@ -284,7 +288,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "https://contractr.onrender.com/auth/google/client/login/callback",
+      callbackURL: `${backendUrl}/auth/google/client/login/callback`,
       passReqToCallback: true,
     },
     async (req, accessToken, refreshToken, profile, done) => {
@@ -312,7 +316,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "https://contractr.onrender.com/auth/google/client/signup/callback",
+      callbackURL: `${backendUrl}/auth/google/client/signup/callback`,
       passReqToCallback: true,
     },
     async (req, accessToken, refreshToken, profile, done) => {
