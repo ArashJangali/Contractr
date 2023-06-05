@@ -28,7 +28,7 @@ function Customer({
 
   useEffect(() => {
     async function fetchData() {
-      const req = await axios.get("/clientuser");
+      const req = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/clientuser`);
 
       setClients(req.data);
     }
@@ -38,7 +38,7 @@ function Customer({
 
   useEffect(() => {
     async function getUnmatchedClients() {
-      const response = await axios.get("/getUnmatchedClients", {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getUnmatchedClients`, {
         params: { userId },
       });
       setUnmatchedClients(response.data);
@@ -50,7 +50,7 @@ function Customer({
 
   const likeClient = async (likedClientId) => {
     try {
-      await axios.put("/addLikedClients", {
+      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/addLikedClients`, {
         userId,
         likedClientId,
       });
@@ -135,7 +135,7 @@ function Customer({
           const dislikedClientId =
             filteredNotLikedClients[currentIndex]?.client_user_id;
           console.log(dislikedClientId);
-          await axios.put("/addDislikedClient", {
+          await axios.put(`${process.env.REACT_APP_BACKEND_URL}/addDislikedClient`, {
             userId,
             dislikedClientId,
           });
@@ -197,7 +197,7 @@ function Customer({
           updateCurrentIndex(lastSwipedCard.index);
 
           if (lastDirection === "up") {
-            const response = await axios.patch("/removeLikedClients", {
+            const response = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/removeLikedClients`, {
               userId,
               clientId: lastSwipedCard.clientId,
             });
@@ -205,7 +205,7 @@ function Customer({
             setUpdatedConnects(updatedUserConnects);
             window.location.reload();
           } else {
-            await axios.patch("/deleteDislikedClient", {
+            await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/deleteDislikedClient`, {
               userId,
               dislikedClientId: lastSwipedCard.clientId,
             });

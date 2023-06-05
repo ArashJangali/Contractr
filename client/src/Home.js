@@ -24,6 +24,7 @@ const Home = ({ setClient, setFreelancer, client, freelancer }) => {
       />
 
       <div className="home">
+      {!showAuthModal &&
         <div className="user-type">
           <input
             type="radio"
@@ -49,11 +50,11 @@ const Home = ({ setClient, setFreelancer, client, freelancer }) => {
             }}
           />
           <label htmlFor="client">I'm a Client</label>
-        </div>
-        <h1 className="title-primary">Match With Your Next Hire®</h1>
-        <button className="btn-primary" onClick={handleClick}>
+        </div> }
+       {!showAuthModal && <h1 className="title-primary-h1">Match With Your Next Hire®</h1>}
+       {!showAuthModal && <button className="btn-primary" onClick={handleClick}>
           {loggedIn ? "Signout" : "Create Account"}
-        </button>
+        </button>}
 
         {showAuthModal ? (
           <AuthModal

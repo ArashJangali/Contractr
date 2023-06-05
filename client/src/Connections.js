@@ -61,7 +61,7 @@ function Connections({
     }
 
     try {
-      const response = await axios.get("/freelancerconnects", {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/freelancerconnects`, {
         params: { userIds: JSON.stringify(likedFreelancerIds) },
       });
       setLikedFreelancers(response.data);
@@ -79,7 +79,7 @@ function Connections({
     }
 
     try {
-      const response = await axios.get("/likedClients", {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/likedClients`, {
         params: { likedClientIds: JSON.stringify(likedClientIds) },
       });
       setLikedClients(response.data);

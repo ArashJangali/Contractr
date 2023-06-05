@@ -47,7 +47,7 @@ const AuthModal = ({
 
       try {
         const response = await axios.post(
-          `/${route}`,
+          `${process.env.REACT_APP_BACKEND_URL}/${route}`,
           { email, password },
           {
             withCredentials: true,
@@ -97,6 +97,7 @@ const AuthModal = ({
   }
   async function googleSignIn() {
     const userType = freelancer ? "freelancer" : "client";
+  
     const backendUrl = process.env.REACT_APP_BACKEND_URL;
     const authUrl = isSignUp
       ? `${backendUrl}/auth/google/${userType}/signup`
@@ -152,7 +153,7 @@ const AuthModal = ({
       <div className="cross" onClick={handleClick}>
         <AiOutlineCloseCircle />
       </div>
-      <h2>{isSignUp ? "Create Account" : "Log In"}</h2>
+      
       <img className="authmodal-img" src="/images/logo-color.png" alt="color logo" />
 
       <form
@@ -160,7 +161,7 @@ const AuthModal = ({
         autoComplete="off"
         onSubmit={handleSubmit}
       >
-        <input
+        {/* <input
           type="email"
           id="email"
           name="email"
@@ -187,8 +188,8 @@ const AuthModal = ({
           />
         )}
         <input className="btn-secondary" type="submit" />
-        <h5>OR</h5>
-        <button onClick={googleSignIn} className="btn-secondary" type="button">
+        <h5>OR</h5> */}
+        <button onClick={googleSignIn} className="btn-secondary-google" type="button">
           <FaGoogle className="google-icon" />{" "}
           {isSignUp ? "Sign Up With Google" : "Sign In With Google"}
         </button>

@@ -44,7 +44,7 @@ const OnBoarding = () => {
     const rote = "freelancerprofile";
 
     try {
-      const response = await axios.get(`/${rote}`, {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/${rote}`, {
         params: { userId },
       });
       setUser(response.data);
@@ -60,10 +60,10 @@ const OnBoarding = () => {
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    console.log("submitted");
+    
     e.preventDefault();
     try {
-      const response = await axios.put("/user", { formData });
+      const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/user`, { formData });
       const success = response.status === 200;
       console.log(response);
       if (success) navigate("/clientdashboard");
@@ -98,7 +98,7 @@ const OnBoarding = () => {
   }
 
   return (
-    freelancer && (
+    (freelancer || user?.googleId) && (
       <>
         <Header
           smallState={true}
@@ -109,7 +109,7 @@ const OnBoarding = () => {
           <h2 style={{ color: "white" }}>CONTRACTOR PROFILE</h2>
 
           <form onSubmit={handleSubmit}>
-            <section>
+            <section className="first-section">
               <label htmlFor="first_name">First Name</label>
               <input
                 id="first_name"

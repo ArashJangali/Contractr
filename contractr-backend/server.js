@@ -174,6 +174,11 @@ app.post("/login", async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).send("Invalid Credentials");
+    }
+
     const correctPassword = await bcrypt.compare(password, user.password);
 
     if (user && correctPassword) {

@@ -42,7 +42,7 @@ const ClientOnBoarding = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put("/clientuser", { clientForm });
+      const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/clientuser`, { clientForm });
       const success = response.status === 200;
       if (success) navigate("/dashboard");
     } catch (err) {
@@ -56,7 +56,7 @@ const ClientOnBoarding = () => {
     const rote = "profile";
 
     try {
-      const response = await axios.get(`/${rote}`, {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/${rote}`, {
         params: { userId },
       });
       setUser(response.data);
@@ -96,7 +96,7 @@ const ClientOnBoarding = () => {
   }
 
   return (
-    client && (
+    (client || user?.googleId) && (
       <>
         <Header
           smallState={true}
@@ -107,7 +107,7 @@ const ClientOnBoarding = () => {
           <h2 style={{ color: "white" }}>CLIENT PROFILE</h2>
 
           <form onSubmit={handleSubmit}>
-            <section>
+            <section className="first-section">
               <label htmlFor="client_first_name">First Name</label>
               <input
                 id="client_first_name"

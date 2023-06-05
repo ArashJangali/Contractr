@@ -25,7 +25,7 @@ function MessageInput({
 
   const sendMessage = async () => {
     try {
-      const response = await axios.post("/messages", {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/messages`, {
         senderId,
         senderName,
         senderImg,
@@ -49,7 +49,7 @@ function MessageInput({
 
   const getMessage = async () => {
     try {
-      const response = await axios.get("/messages", {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/messages`, {
         params: {
           senderId: senderId,
           receiverId: receiverId,

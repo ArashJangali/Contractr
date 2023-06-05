@@ -62,7 +62,7 @@ function Dashboard({ people }) {
       rote = "freelancerprofile";
     }
     try {
-      const response = await axios.get(`/${rote}`, {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/${rote}`, {
         params: { userId },
       });
       setUser(response.data);
@@ -81,7 +81,7 @@ function Dashboard({ people }) {
   const [like, setLike] = useState(null);
 
   return (
-    client && (
+    (client || user?.googleId) && (
       <div>
         <div className="centerMain">
           <ChatToggle

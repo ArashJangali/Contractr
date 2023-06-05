@@ -1,3 +1,28 @@
+/* General style + homepage */
+
+
+.viewportHome {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.498), rgba(0, 0, 0, 0.504)), url("../public/images/Screenshot_2023-04-11_at_03.44.23.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+
+.footer {
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  text-align: center;
+  color: #84848442;
+  bottom: -5px;
+}
+
+
+
 .app {
   height: 100vh;
 }
@@ -53,6 +78,11 @@ nav .btn-primary:hover {
   color: white;
 }
 
+.title-primary-h1 {
+  font-size: 25px !important;
+  margin-top: -110px;
+}
+
 .btn-secondary {
   color: rgb(117, 117, 117);
   background-color: white;
@@ -84,8 +114,8 @@ nav .btn-primary:hover {
 .user-type input[type=radio]+label {
   padding: 12px;
   border-radius: 10px;
-  font-size: 30px;
-  margin: 0px 32px;
+  font-size: 20px;
+  margin: 0px 12px;
   border: solid 2px rgb(136, 124, 109);
 }
 
@@ -103,7 +133,7 @@ nav .btn-primary:hover {
   margin: 25px;
   bottom: 900px !important;
   margin-bottom: 200px;
-  margin-top: -100px;
+  margin-top: 100px;
 }
 
 body {
@@ -122,111 +152,86 @@ body {
   border: none;
 }
 
-.centerMain {
-  display: flex;
-  flex-direction: row;
+/* General style + homepage for other devices */
+
+/* For tablet devices */
+
+@media only screen and (max-width: 768px) {
+  .viewportHome {
+    background-position: top center;
+  }
+
+  .footer {
+    height: 40px;
+  }
 }
 
-.chat-message-container {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
+@media only screen and (max-width: 768px) {
+  .title-primary {
+    font-size: 35px;
+  }
+
+  .title-primary-h1 {
+    font-size: 20px;
+  }
+
+  .home {
+    margin-top: 100px;
+  }
 }
 
-.main {
-  text-align: center;
-  display: flex;
-  margin-bottom: 5%;
-  justify-content: center;
-  box-shadow: rgb(0, 0, 0);
-  width: 80%;
-  margin-right: 200px !important;
-  margin-top: 30px !important;
+/* For mobile devices */
 
+@media only screen and (max-width: 480px) {
+  .viewportHome {
+    background-position: top center;
+  }
+
+  .footer {
+    height: 30px;
+  }
 }
 
-.messageSuccess {
-  opacity: 0;
-  transition: opacity 1.5s ease-out;
-  position: absolute;
-  bottom: 30px;
-  left: 60px;
-  color: rgb(183, 213, 223);
-  padding: 8px 16px;
-  border-radius: 10px;
-  background-color: rgba(42, 34, 22, 0.386);
-  width: 300px;
-  height: 120px;
-  border-bottom: 2px solid lightBlue;
-  border-right: 2px solid lightBlue;
-  overflow: scroll;
-  text-align: right;
-  font-size: 11px;
+@media only screen and (max-width: 480px) {
+  .title-primary {
+    font-size: 25px;
+  }
+
+  .title-primary-h1 {
+    font-size: 18px;
+  }
+
+  .btn-primary {
+    font-size: 12px;
+    padding: 8px 20px;
+  }
+
+  nav .btn-primary {
+    padding: 8px;
+    max-height: 40px;
+  }
+
+  .btn-secondary {
+    font-size: 10px;
+    padding: 5px 10px;
+    border-radius: 20px;
+  }
+
+  .home {
+    margin-top: 80px;
+  }
+
+  .user-type input[type=radio]+label {
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .user-type {
+    margin-top: 60px;
+  }
 }
 
-.messageSuccess.visible {
-  opacity: 1;
-  transition: opacity 1.5s ease-out;
-  position: absolute;
-  bottom: 30px;
-  left: 60px;
-  color: rgb(183, 213, 223);
-  padding: 8px 16px;
-  border-radius: 10px;
-  background-color: rgba(42, 34, 22, 0.386);
-  width: 300px;
-  height: 120px;
-  border-bottom: 2px solid lightBlue;
-  border-right: 2px solid lightBlue;
-  overflow: scroll;
-  text-align: right;
-  font-size: 11px;
-}
-
-.messages p {
-  margin-top: 0px !important;
-  margin-bottom: 0px !important;
-}
-
-.messages {
-  margin-top: -18px !important;
-}
-
-.messageSuccess p {
-  margin-bottom: 3px;
-  text-align: right;
-}
-
-.sender-img {
-  width: 80% !important;
-  height: 80% !important;
-}
-
-.sendername {
-  margin-right: 15% !important;
-}
-
-.message-content {
-  margin-top: 15px !important;
-  margin-bottom: 15px !important;
-}
-
-.messages {
-  margin-top: 5px !important;
-  margin-bottom: 5px !important;
-}
-
-.unmatch-button {
-
-  z-index: 1000;
-
-}
-
-.messageSuccess.visible p {
-  margin-bottom: 3px;
-
-  text-align: right;
-}
+/* navbar */
 
 nav {
   width: 100%;
@@ -261,26 +266,144 @@ nav .logo-div .logo {
   color: #03175d;
 }
 
+/* navbar for other devices */
 
-.viewportHome {
-  width: 100vw;
-  height: 100vh;
+/* For tablet devices */
+@media only screen and (max-width: 768px) {
+  nav .logo-div {
+    width: 100px;
+  }
+
+  .navBtn {
+    font-size: 16px;
+    padding: 8px 12px;
+    width: 80px;
+    height: 40px;
+  }
+}
+
+/* For mobile devices */
+@media only screen and (max-width: 480px) {
+  nav .logo-div {
+    width: 80px;
+  }
+
+  .navBtn {
+    font-size: 14px;
+    padding: 6px 10px;
+    width: 60px;
+    height: 30px;
+  }
+}
+
+
+/* AuthModal */
+
+
+.authModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: fixed;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.498), rgba(0, 0, 0, 0.504)), url("../public/images/Screenshot_2023-04-11_at_03.44.23.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
-
-.footer {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
-  height: 50px;
-  position: absolute;
-  text-align: center;
-  color: #848484a4;
-  bottom: 10px;
+  max-width: 430px;
+  height: 240px;
+  padding: 30px;
+  background-image: linear-gradient(0deg, rgba(0, 0, 0) 0%, rgba(0, 0, 0) 67%, rgba(0, 0, 0, 0.736) 75%);
+  border-radius: 15px;
+  z-index: 3;
 }
+
+
+.authModal h2 {
+  position: relative;
+  top: -14px;
+  color: #ffffffc3;
+}
+
+.authModal form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.authModal input {
+  border-radius: 10px;
+}
+
+.authModal input[type=email],
+.authModal input[type=password],
+.authModal .btn-secondary,
+.authModal .btn-secondary:hover {
+  width: 100%;
+  max-width: 375px;
+  margin-left: 0;
+}
+
+.google-icon {
+  margin-bottom: -2px;
+}
+
+.authmodal-img {
+  width: 210px;
+  height: 140px;
+  margin-right: -5px;
+}
+
+.btn-secondary-google {
+  color: rgb(117, 117, 117);
+  background-color: white;
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: uppercase;
+  padding: 7px 10px;
+  border-radius: 25px;
+  border: solid 1.8px rgb(117, 117, 117);
+  margin: 4px;
+  text-align: center;
+  margin-top: 110px;
+  margin-left: 97px;
+  width: 250px;
+  margin: 4px auto;
+}
+
+
+.btn-secondary-google:hover {
+  background-color: #03175d;
+  color: white;
+  border: 0;
+  border-right: solid 2px rgba(255, 255, 255, 0.963);
+  border-bottom: solid 2px rgba(255, 255, 255, 0.963);
+}
+
+.sign-up-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.authModal h5 {
+  color: #b0accb;
+  margin-left: -340px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.cross {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #716aa8;
+  padding: 3px;
+  width: 20px;
+  height: 20px;
+}
+
+
+/* logged in page buttons */
 
 .engagement {
   height: 550px;
@@ -308,15 +431,6 @@ nav .logo-div .logo {
 }
 
 
-.ratingImg {
-  color: #ffffff;
-  width: 100px;
-  position: relative;
-  margin-bottom: 0;
-  margin-right: 500px;
-  border-color: #ffffff;
-}
-
 .preference {
   height: 550px;
   width: 50px;
@@ -328,7 +442,9 @@ nav .logo-div .logo {
   margin-top: 50px;
 }
 
-
+.preference-icon-button {
+  margin-left: 260px;
+}
 
 .mainButtons {
   position: absolute;
@@ -339,6 +455,119 @@ nav .logo-div .logo {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-evenly;
+}
+
+/* logged in page buttons for other devices */
+
+/* For mobile devices */
+@media (max-width: 600px) {
+  .engagement {
+    width: 80px;
+    margin-left: 5px;
+    margin-top: 50px;
+  }
+
+
+  .preference {
+    width: 80px;
+    margin-left: 5px;
+    margin-top: 25px;
+  }
+
+  .preference-icon-button {
+    margin-left: 10px;
+  }
+
+  .contractrOne {
+    width: 320px;
+  }
+
+  .mainButtons {
+    bottom: 5vh;
+    position: fixed;
+    width: 80%;
+    left: 10%;
+  }
+}
+
+
+/* For tablet devices */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .engagement {
+    width: 100px;
+    margin-left: -460px;
+    margin-top: 250px;
+  }
+
+  .preference {
+    width: 100px;
+    margin-left: -150px;
+    margin-top: 50px;
+  }
+
+  .preference-icon-button {
+    margin-left: 200px !important;
+    position: fixed !important;
+  }
+
+  .contractrOne {
+    width: 480px;
+  }
+
+  .mainButtons {
+    bottom: 5vh;
+    position: fixed;
+    width: 80%;
+    left: 10%;
+  }
+}
+
+
+/* For desktop devices */
+@media (min-width: 1025px) {
+
+  .engagement,
+  .preference {
+    width: 120px;
+    margin-left: 20px;
+    margin-top: 60px;
+  }
+
+  .preference-icon-button {
+    margin-left: 260px !important;
+  }
+
+  .contractrOne {
+    width: 650px;
+  }
+
+  .mainButtons {
+    width: 600px;
+    margin-top: 566px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1400px) {
+
+  .preference {
+    width: 100%;
+    margin-left: -150px !important;
+    margin-top: 60px;
+  }
+}
+
+/* cards */
+
+.main {
+  text-align: center;
+  display: flex;
+  margin-bottom: 5%;
+  justify-content: center;
+  box-shadow: rgb(0, 0, 0);
+  width: 80%;
+  margin-right: 200px !important;
+  margin-top: 10px !important;
+
 }
 
 .card {
@@ -368,8 +597,6 @@ nav .logo-div .logo {
   margin: 10px;
 }
 
-
-
 .card p {
   position: absolute;
   color: white;
@@ -383,6 +610,11 @@ nav .logo-div .logo {
   margin-top: 4vh;
 }
 
+.cardContainer .card {
+  border-bottom: 2px solid lightBlue;
+  border-right: 2px solid lightBlue;
+}
+
 .swipe {
   position: absolute;
 }
@@ -392,97 +624,48 @@ nav .logo-div .logo {
   height: 100%;
 }
 
-/* AuthModal */
+/* cards for other devices */
 
+/* For mobile devices */
+@media (max-width: 600px) {
 
-.authModal {
-  position: absolute;
-  top: 205px;
-  left: 320px;
-  right: 0;
-  width: 750px;
-  height: 340px;
-  padding: 30px;
-  background-image: linear-gradient(0deg, rgba(0, 0, 0) 0%, rgba(0, 0, 0) 67%, rgba(0, 0, 0, 0.736) 75%);
-  border-radius: 15px;
-  text-align: center;
-  z-index: 3;
+  .main {
+    width: 100%;
+    margin-right: 0 !important;
+  }
+
+  .card {
+    width: 85vw;
+    height: 60vh;
+  }
 }
 
-.authModal h2 {
-  position: relative !important;
-  top: -14px;
-  color: #ffffffc3;
+/* For tablet devices */
+@media (min-width: 601px) and (max-width: 1024px) {
+
+  .main {
+    width: 90%;
+    margin-right: 0 !important;
+  }
+
+  .card {
+    width: 70vw;
+    height: 65vh;
+  }
 }
 
-.authModal form {
-  display: flex;
-  flex-direction: column;
-  margin-top: -270px;
-}
+/* For desktop devices */
+@media (min-width: 1025px) {
 
-.authModal input {
-  border-radius: 10px;
-}
+  .main {
+    width: 80%;
+    margin-right: 200px !important;
+  }
 
-.authModal input[type=email],
-.authModal input[type=password] {
-  padding: 9px;
-  margin: 9px;
-  font-size: 18px;
-  width: 375px !important;
-  border-bottom: 2px solid #90cee3;
-  border-right: 2px solid #90cee3;
-}
-
-.authModal .btn-secondary:hover {
-  color: #ffffff;
-  background-color: #080243;
-  width: 375px !important;
-  margin-left: 17px;
-}
-
-.authModal .btn-secondary {
-  width: 375px !important;
-  margin-left: 17px;
-  margin-top: 8px !important;
-  border-bottom: 2px solid #90cee3;
-  border-right: 2px solid #90cee3;
-}
-
-.google-icon {
-  margin-bottom: -2px;
-}
-
-.authmodal-img {
-  width: 360px !important;
-  height: 240px !important;
-  margin-right: -440px;
-  margin-top: 40px !important;
-}
-
-.sign-up-form {
-  display: flex;
-  flex-direction: column;
-  margin-top: -280px !important;
-
-}
-
-.authModal h5 {
-  color: #b0accb;
-  margin-left: -340px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-}
-
-.cross {
-  float: right;
-  color: #716aa8;
-  padding: 3px;
-  margin-top: -15px !important;
-  margin-right: -15px !important;
-  width: 20px !important;
-  height: 20px !important;
+  .card {
+    width: 600px;
+    height: 70vh;
+  }
 }
 
 /* onBoarding  */
@@ -567,7 +750,6 @@ input[type="radio"]:checked+label {
   border-radius: 20px !important;
 }
 
-
 .country {
   display: flex;
   flex-direction: column;
@@ -605,6 +787,38 @@ input[type="radio"]:checked+label {
   border-radius: 10px;
 }
 
+/* onboarding smaller devices */
+
+@media (max-width: 768px) {
+  .onboarding form {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .onboarding form section {
+    width: 90%;
+  }
+}
+
+
+@media (min-width: 768px) and (max-width: 1155px) {
+  .onboarding .first-section .experience label {
+    padding: 5px !important;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 868px) {
+  .onboarding form label {
+    font-size: 12px;
+  }
+
+  .right-section input[type="submit"] {
+    margin-top: 100px !important;
+  }
+
+}
+
 /* ----- chat ----- */
 
 .chat-container {
@@ -622,19 +836,6 @@ input[type="radio"]:checked+label {
   display: flex;
 
   flex-direction: column;
-}
-
-.message-container {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
-  display: flex;
-}
-
-.message-container.visible {
-  max-height: 250px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .chat-buttons {
@@ -664,16 +865,6 @@ input[type="radio"]:checked+label {
   box-shadow: rgb(0, 0, 0);
 }
 
-.message-div {
-  margin-top: 50px;
-  width: 50%;
-  max-height: 900px;
-  align-items: center;
-  text-align: center;
-  color: white;
-  box-shadow: rgb(0, 0, 0);
-  margin-left: -30px;
-}
 
 .chat-buttons-div {
   display: flex;
@@ -777,6 +968,162 @@ input[type="radio"]:checked+label {
   text-align: center;
 }
 
+/* chat smaller devices */
+
+@media (max-width: 600px) {
+  .chat-container {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .chat-buttons-div {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+  }
+
+  .chat .chat-header {
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+  }
+
+  .chat .profile {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chat .profile h3 {
+    margin-left: 0;
+  }
+
+  .likedPeople {
+    align-items: center;
+  }
+
+  .likedPeople h3 {
+    margin-top: 10px;
+  }
+}
+
+/* messages */
+
+.message-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+  display: flex;
+}
+
+.message-container.visible {
+  max-height: 250px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.message-div {
+  margin-top: 50px;
+  width: 50%;
+  max-height: 900px;
+  align-items: center;
+  text-align: center;
+  color: white;
+  box-shadow: rgb(0, 0, 0);
+  margin-left: -30px;
+}
+
+.centerMain {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.chat-message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+
+.messageSuccess {
+  opacity: 0;
+  transition: opacity 1.5s ease-out;
+  position: absolute;
+  bottom: 30px;
+  left: 60px;
+  color: rgb(183, 213, 223);
+  padding: 8px 16px;
+  border-radius: 10px;
+  background-color: rgba(42, 34, 22, 0.386);
+  width: 300px;
+  height: 120px;
+  border-bottom: 2px solid lightBlue;
+  border-right: 2px solid lightBlue;
+  overflow: scroll;
+  text-align: right;
+  font-size: 11px;
+}
+
+.messageSuccess.visible {
+  opacity: 1;
+  transition: opacity 1.5s ease-out;
+  position: absolute;
+  bottom: 30px;
+  left: 60px;
+  color: rgb(183, 213, 223);
+  padding: 8px 16px;
+  border-radius: 10px;
+  background-color: rgba(42, 34, 22, 0.386);
+  width: 300px;
+  height: 120px;
+  border-bottom: 2px solid lightBlue;
+  border-right: 2px solid lightBlue;
+  overflow: scroll;
+  text-align: right;
+  font-size: 11px;
+}
+
+.messages p {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+.messages {
+  margin-top: -18px !important;
+}
+
+.messageSuccess p {
+  margin-bottom: 3px;
+  text-align: right;
+}
+
+.sender-img {
+  width: 80% !important;
+  height: 80% !important;
+}
+
+.sendername {
+  margin-right: 15% !important;
+}
+
+.message-content {
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+}
+
+.messages {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
+.unmatch-button {
+  z-index: 1000;
+}
+
+.messageSuccess.visible p {
+  margin-bottom: 3px;
+  text-align: right;
+}
 
 .message-display {
   padding: 20px;
@@ -836,16 +1183,109 @@ input[type="radio"]:checked+label {
   margin-left: 60px !important;
 }
 
-.cardContainer .card {
-  border-bottom: 2px solid lightBlue;
-  border-right: 2px solid lightBlue;
-
-}
-
 .message-input .btn-secondary:hover {
   background-color: #03175d;
   color: white;
   border: 0;
   border-right: solid 2px rgba(255, 255, 255, 0.963);
   border-bottom: solid 2px rgba(255, 255, 255, 0.963);
+}
+
+/* message smaller devices */
+
+@media (max-width: 600px) {
+  .message-container {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .message-div {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .centerMain {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chat-message-container {
+    align-items: center;
+  }
+
+  .messageSuccess {
+    left: 10px;
+    right: 10px;
+    width: auto;
+  }
+
+  .messageSuccess.visible {
+    left: 10px;
+    right: 10px;
+    width: auto;
+  }
+
+  .message-display {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .message-input {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .message-input textarea {
+    width: 80%;
+  }
+
+  .message-input .btn-secondary {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .message-container {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .message-div {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .centerMain {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main,
+  .chat-message-container {
+    height: 50%;
+  }
+
+  .main {
+    width: 100%;
+    height: 70%;
+    margin-right: 0 !important;
+    text-align: center;
+    display: flex;
+    margin-bottom: 5%;
+    justify-content: center;
+    box-shadow: rgb(0, 0, 0);
+    margin-top: 10px !important;
+  }
+
+  .chat-message-container {
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+
+
 }

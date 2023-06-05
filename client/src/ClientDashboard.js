@@ -58,7 +58,7 @@ function ClientDashboard() {
 
     if (isFreelancer) route = "freelancerprofile";
     try {
-      const response = await axios.get("/freelancerprofile", {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/freelancerprofile`, {
         params: { userId },
       });
       setUser(response.data);
@@ -72,7 +72,7 @@ function ClientDashboard() {
   }, []);
 
   return (
-    freelancer && (
+    (freelancer || user?.googleId) && (
       <div>
         <div className="centerMain">
           <ChatToggle

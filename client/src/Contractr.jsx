@@ -34,7 +34,7 @@ function Contractr({
 
   useEffect(() => {
     async function fetchData() {
-      const req = await axios.get("/user");
+      const req = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user`);
 
       setPeople(req.data);
     }
@@ -44,7 +44,7 @@ function Contractr({
 
   useEffect(() => {
     async function getUnmatched() {
-      const response = await axios.get("/getUnmatchedFreelancers", {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getUnmatchedFreelancers`, {
         params: { userId },
       });
       setUnmatchedFreelancers(response.data);
@@ -57,7 +57,7 @@ function Contractr({
   // the function that puts the userid of the liked freelancer in the signed in users "like array"
   const functionLikeFreelancer = async (likedFreelancerIds) => {
     try {
-      await axios.put("/addConnect", {
+      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/addConnect`, {
         userId,
         likedFreelancerIds,
       });
@@ -139,7 +139,7 @@ function Contractr({
           const dislikedFreelancerId =
             filteredNotLikedFreelancers[currentIndex]?.user_id;
           console.log(dislikedFreelancerId);
-          await axios.put("/addDislikedFreelancer", {
+          await axios.put(`${process.env.REACT_APP_BACKEND_URL}/addDislikedFreelancer`, {
             userId,
             dislikedFreelancerId,
           });
@@ -198,7 +198,7 @@ function Contractr({
           updateCurrentIndex(lastSwipedCard.index);
 
           if (lastDirection === "up") {
-            const response = await axios.patch("/removeLikedFreelancers", {
+            const response = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/removeLikedFreelancers`, {
               userId,
               freelancerId: lastSwipedCard.freelancerId,
             });
@@ -206,7 +206,7 @@ function Contractr({
             setUpdatedConnects(updatedUserConnects);
             window.location.reload();
           } else {
-            await axios.patch("/deleteDisliked", {
+            await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/deleteDisliked`, {
               userId,
               dislikedFreelancerId: lastSwipedCard.freelancerId,
             });

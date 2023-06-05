@@ -24,14 +24,14 @@ const UnmatchButton = ({
   const handleUnMatchClick = async () => {
     try {
       if (isClient) {
-        const response = await axios.patch("/unmatchFreelancer", {
+        const response = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/unmatchFreelancer`, {
           id,
           loggedInId,
         });
         const unmatchedFreelancersResponse = response.data.unmatched;
         setUnmatchedFreelancers(unmatchedFreelancersResponse);
       } else if (isFreelancer) {
-        const response = await axios.patch("/unmatchClient", {
+        const response = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/unmatchClient`, {
           id,
           loggedInId,
         });

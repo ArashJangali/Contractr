@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await axios.get("/auth/user");
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/auth/user`);
         setUserId(response.data.user._id);
       } catch (error) {
         console.error("Could not fetch user");

@@ -14,11 +14,11 @@ function Preference({ isFreelancer, isClient }) {
   return (
     <div className="preference">
       <IconButton
+        className="preference-icon-button"
         onClick={handleClick}
         style={{
           color: "lightBlue",
-          marginLeft: "260px",
-          marginBottom: "650px",
+          marginBottom: "625px",
         }}
       >
         <PersonIcon fontSize="large" />
