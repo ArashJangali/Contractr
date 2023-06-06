@@ -67,7 +67,7 @@ function ClientDashboard() {
     }
   }
 
-
+console.log("ClientDashboard user:", user, "googleID:", user.googleId)
 
   useEffect(() => {
     getUser();
