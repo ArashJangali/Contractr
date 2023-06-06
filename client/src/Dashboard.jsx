@@ -27,7 +27,7 @@ function Dashboard({ people }) {
   const [messageClicked, setMessageClicked] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [undo, setUndo] = useState(false);
-  const userId = cookies.UserId;
+  const userId = user?.googleId;
   const [undoClicked, setUndoClicked] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState(false);
   const [unmatchedFreelancers, setUnmatchedFreelancers] = useState([]);

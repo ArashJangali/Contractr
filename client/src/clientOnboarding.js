@@ -13,7 +13,7 @@ import {
 
 const ClientOnBoarding = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  const userId = cookies.UserId;
+  const userId = user?.googleId;
   const [user, setUser] = useState([]);
   const [client, setClient] = useState(null);
 

@@ -23,7 +23,7 @@ function ClientDashboard() {
   const [user, setUser] = useState(null);
   const [messageActivate, setMessageActivate] = useState(false);
   const [thumbs, setThumbs] = useState(null);
-  const userId = cookies.UserId;
+  const userId = user?.googleId;
   const [clickedClient, setClickedClient] = useState(null);
   const location = useLocation();
   const isFreelancer = true;
@@ -67,7 +67,7 @@ function ClientDashboard() {
     }
   }
 
-console.log("ClientDashboard user:", user, "googleID:", user?.googleId)
+console.log("ClientDashboard userId:", userId, "googleID:", user?.googleId)
 
   useEffect(() => {
     getUser();
