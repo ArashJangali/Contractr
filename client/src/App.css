@@ -420,16 +420,6 @@ nav .logo-div .logo {
   color: white;
 }
 
-.contractrOne {
-  display: flex;
-  justify-content: center;
-  width: 650px;
-  height: auto;
-  position: relative;
-  border-radius: 20px;
-  z-index: 10;
-}
-
 
 .preference {
   height: 550px;
@@ -443,7 +433,7 @@ nav .logo-div .logo {
 }
 
 .preference-icon-button {
-  margin-left: 260px;
+  margin-left: 20%;  
 }
 
 .mainButtons {
@@ -459,44 +449,19 @@ nav .logo-div .logo {
 
 /* logged in page buttons for other devices */
 
-/* For mobile devices */
-@media (max-width: 600px) {
-  .engagement {
-    width: 80px;
-    margin-left: 5px;
-    margin-top: 50px;
-  }
 
-
-  .preference {
-    width: 80px;
-    margin-left: 5px;
-    margin-top: 25px;
-  }
-
-  .preference-icon-button {
-    margin-left: 10px;
-  }
-
-  .contractrOne {
-    width: 320px;
-  }
-
-  .mainButtons {
-    bottom: 5vh;
-    position: fixed;
-    width: 80%;
-    left: 10%;
-  }
-}
 
 
 /* For tablet devices */
 @media (min-width: 601px) and (max-width: 1024px) {
   .engagement {
     width: 100px;
-    margin-left: -460px;
+    margin-left: -260px !important;
     margin-top: 250px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
   }
 
   .preference {
@@ -505,18 +470,11 @@ nav .logo-div .logo {
     margin-top: 50px;
   }
 
-  .preference-icon-button {
-    margin-left: 200px !important;
-    position: fixed !important;
-  }
-
-  .contractrOne {
-    width: 480px;
-  }
+ 
 
   .mainButtons {
     bottom: 5vh;
-    position: fixed;
+    position: absolute;
     width: 80%;
     left: 10%;
   }
@@ -532,10 +490,7 @@ nav .logo-div .logo {
     margin-left: 20px;
     margin-top: 60px;
   }
-
-  .preference-icon-button {
-    margin-left: 260px !important;
-  }
+ 
 
   .contractrOne {
     width: 650px;
@@ -547,12 +502,15 @@ nav .logo-div .logo {
   }
 }
 
-@media (min-width: 1025px) and (max-width: 1400px) {
+@media (max-width: 1400px) {
+  .preference-icon-button {
+    margin-left: 15%;  
+  }
+}
 
-  .preference {
-    width: 100%;
-    margin-left: -150px !important;
-    margin-top: 60px;
+@media (max-width: 1024px) {
+  .preference-icon-button {
+    margin-left: 10%; 
   }
 }
 
@@ -626,47 +584,245 @@ nav .logo-div .logo {
 
 /* cards for other devices */
 
-/* For mobile devices */
-@media (max-width: 600px) {
+@media (max-width: 1024px) {
+  .engagement,
+  .preference {
+    width: 80px;
+    margin-top: 30px;
+  }
+
+  .engagement {
+    width: 100%;
+     margin-left: -1% !important;
+  }
+
+  .contractrOne {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   .main {
     width: 100%;
-    margin-right: 0 !important;
+    margin-right: -11% !important; 
+    margin-top: 5px !important;
+    margin-left: 25%;
   }
 
   .card {
-    width: 85vw;
-    height: 60vh;
+    width: 100%; 
+    padding: 70px 130px; 
+    height: 50vh; 
+    max-width: 80vw; 
+    margin-top: -135px;
+    margin-left: -45%;
+  }
+
+.mainButtons {
+  margin-left: 56%;
+}
+
+  .card h2,
+  .card h4,
+  .card p {
+    font-size: 0.85rem; 
+    text-align: left;
+    margin-left: -22%;
+  }
+
+  .cardContainer {
+    margin-top: 2vh;
   }
 }
 
-/* For tablet devices */
-@media (min-width: 601px) and (max-width: 1024px) {
+@media (max-width: 925px) {
+  .engagement {
+    width: 100%;
+     margin-left: -10% !important;
+  }
+}
 
-  .main {
-    width: 90%;
-    margin-right: 0 !important;
+@media (max-width: 858px) {
+  .engagement {
+    width: 100%;
+     margin-left: -40% !important;
+  }
+
+  .mainButtons {
+    margin-left: 54%;
+  }
+}
+
+@media (max-width: 795px) {
+  .engagement {
+    width: 100%;
+     margin-left: -70% !important;
+  }
+
+  .mainButtons {
+    margin-left: 52%;
+  }
+}
+
+@media (max-width: 710px) {
+  .engagement {
+    width: 100%;
+     margin-left: -70% !important;
+  }
+
+  .mainButtons {
+    margin-left: 52%;
+    margin-bottom: 5% !important;
   }
 
   .card {
-    width: 70vw;
-    height: 65vh;
+    width: 100%; 
+    padding: 50px 100px; 
+    height: 50vh; 
+    max-width: 80vw; 
+    margin-top: -135px;
+    margin-left: -45%;
   }
+
+  .card h2,
+  .card h4,
+  .card p {
+    font-size: 0.75rem; 
+    text-align: left;
+    margin-left: -22%;
+  }
+
 }
 
-/* For desktop devices */
-@media (min-width: 1025px) {
-
-  .main {
-    width: 80%;
-    margin-right: 200px !important;
+@media (max-width: 710px) {
+  .mainButtons {
+    margin-left: 53%;
+    margin-bottom: 13% !important;
   }
 
   .card {
-    width: 600px;
-    height: 70vh;
+    width: 100%; 
+    padding: 30px 95px; 
+    height: 50vh; 
+    max-width: 80vw; 
+    margin-top: -135px;
+    margin-left: -45%;
+  }
+
+  .card h2,
+  .card h4,
+  .card p {
+    font-size: 0.65rem; 
+    text-align: left;
+    margin-left: -22%;
   }
 }
+
+
+@media (max-width: 653px) {
+  .mainButtons {
+    margin-left: 55%;
+    margin-bottom: 16% !important;
+  }
+
+  .engagement {
+    width: 100%;
+     margin-left: -73% !important;
+  }
+
+  .card {
+    width: 100%; 
+    padding: 20px 85px; 
+    height: 50vh; 
+    max-width: 80vw; 
+    margin-top: -135px;
+    margin-left: -45%;
+  }
+
+  .card h2,
+  .card h4,
+  .card p {
+    font-size: 0.65rem; 
+    text-align: left;
+    margin-left: -22%;
+  }
+}
+
+
+
+/* 
+
+@media (max-width: 600px) {
+  .engagement {
+    margin-left: -75% !important;
+  }
+
+  .mainButtons {
+    margin-left: 67%;
+    margin-bottom: 55% !important;
+  }
+
+  .card {
+    padding: 15px 70px; 
+    margin-top: -140px;
+    margin-left: -50%;
+  }
+
+  .card h2,
+  .card h4,
+  .card p {
+    font-size: 0.55rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .engagement {
+    margin-left: -77% !important;
+  }
+
+  .mainButtons {
+    margin-left: 58%;
+    margin-bottom: 20% !important;
+  }
+
+  .card {
+    padding: 10px 60px; 
+    margin-top: -145px;
+    margin-left: -55%;
+  }
+
+  .card h2,
+  .card h4,
+  .card p {
+    font-size: 0.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .engagement {
+    margin-left: -79% !important;
+  }
+
+  .mainButtons {
+    margin-left: 59%;
+    margin-bottom: 22% !important;
+  }
+
+  .card {
+    padding: 5px 50px; 
+    margin-top: -150px;
+    margin-left: -60%;
+  }
+
+  .card h2,
+  .card h4,
+  .card p {
+    font-size: 0.45rem;
+  }
+} */
+
 
 /* onBoarding  */
 
