@@ -74,7 +74,7 @@ function ClientDashboard() {
   }, []);
 
   return (
-    (user?.googleId) && (
+    
       <div>
         <div className="centerMain">
           <ChatToggle
