@@ -751,77 +751,65 @@ nav .logo-div .logo {
 }
 
 
-
-/* 
-
 @media (max-width: 600px) {
   .engagement {
     margin-left: -75% !important;
+    z-index: 1000;
   }
 
   .mainButtons {
-    margin-left: 67%;
-    margin-bottom: 55% !important;
+    margin-left: 37%;
+    margin-top: 506px !important;
   }
 
   .card {
-    padding: 15px 70px; 
+    padding: 15px 80px; 
     margin-top: -140px;
-    margin-left: -50%;
+    margin-left: 20%;
+  } 
+
+  .chat-message-container {
+    height: 500px;
+    width: 118px;
+    margin-left: -50px;
   }
 
-  .card h2,
-  .card h4,
-  .card p {
-    font-size: 0.55rem;
+  .main {
+    margin-left: 300px !important;
   }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 455px) {
+  
   .engagement {
-    margin-left: -77% !important;
+    margin-left: -205px !important;
+    z-index: 1500;
+    width: 40px;
+    
   }
 
   .mainButtons {
-    margin-left: 58%;
-    margin-bottom: 20% !important;
+    margin-left: 55%;
+    margin-top: 506px !important;
   }
 
   .card {
-    padding: 10px 60px; 
-    margin-top: -145px;
-    margin-left: -55%;
+    padding: 15px 90px; 
+    margin-top: -140px;
+    margin-left: 75%;
+  } 
+
+
+  .chat-message-container {
+    height: 500px;
+    width: 88px;
+    margin-left: -99px;
   }
 
-  .card h2,
-  .card h4,
-  .card p {
-    font-size: 0.5rem;
+  .main {
+    margin-left: 300px !important;
   }
 }
-
-@media (max-width: 500px) {
-  .engagement {
-    margin-left: -79% !important;
-  }
-
-  .mainButtons {
-    margin-left: 59%;
-    margin-bottom: 22% !important;
-  }
-
-  .card {
-    padding: 5px 50px; 
-    margin-top: -150px;
-    margin-left: -60%;
-  }
-
-  .card h2,
-  .card h4,
-  .card p {
-    font-size: 0.45rem;
-  }
-} */
 
 
 /* onBoarding  */
@@ -1124,43 +1112,6 @@ input[type="radio"]:checked+label {
   text-align: center;
 }
 
-/* chat smaller devices */
-
-@media (max-width: 600px) {
-  .chat-container {
-    justify-content: center;
-    align-items: center;
-  }
-
-  .chat-buttons-div {
-    flex-direction: column;
-    align-items: center;
-    margin-left: 0;
-  }
-
-  .chat .chat-header {
-    flex-direction: column;
-    height: auto;
-    align-items: center;
-  }
-
-  .chat .profile {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .chat .profile h3 {
-    margin-left: 0;
-  }
-
-  .likedPeople {
-    align-items: center;
-  }
-
-  .likedPeople h3 {
-    margin-top: 10px;
-  }
-}
 
 /* messages */
 
@@ -1349,99 +1300,4 @@ input[type="radio"]:checked+label {
 
 /* message smaller devices */
 
-@media (max-width: 600px) {
-  .message-container {
-    justify-content: center;
-    align-items: center;
-  }
 
-  .message-div {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .centerMain {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .chat-message-container {
-    align-items: center;
-  }
-
-  .messageSuccess {
-    left: 10px;
-    right: 10px;
-    width: auto;
-  }
-
-  .messageSuccess.visible {
-    left: 10px;
-    right: 10px;
-    width: auto;
-  }
-
-  .message-display {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .message-input {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .message-input textarea {
-    width: 80%;
-  }
-
-  .message-input .btn-secondary {
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media (max-width: 600px) {
-  .message-container {
-    justify-content: center;
-    align-items: center;
-  }
-
-  .message-div {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .centerMain {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .main,
-  .chat-message-container {
-    height: 50%;
-  }
-
-  .main {
-    width: 100%;
-    height: 70%;
-    margin-right: 0 !important;
-    text-align: center;
-    display: flex;
-    margin-bottom: 5%;
-    justify-content: center;
-    box-shadow: rgb(0, 0, 0);
-    margin-top: 10px !important;
-  }
-
-  .chat-message-container {
-    height: 30%;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-  }
-
-
-}
