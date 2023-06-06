@@ -81,7 +81,7 @@ function Dashboard({ people }) {
   const [like, setLike] = useState(null);
 
   return (
-    (client || user?.googleId) && (
+    (user?.googleId) &&(
       <div>
         <div className="centerMain">
           <ChatToggle

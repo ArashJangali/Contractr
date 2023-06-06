@@ -20,7 +20,9 @@ function App() {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/auth/user`);
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/auth/user`
+        );
         setUserId(response.data.user._id);
       } catch (error) {
         console.error("Could not fetch user");
@@ -30,6 +32,7 @@ function App() {
   }, []);
 
   const authToken = cookies.AuthToken;
+
 
   return (
     <div className="app">
@@ -47,31 +50,24 @@ function App() {
             }
           />
 
-          {(authToken || userId) && (
-            <Route path="/dashboard" element={<Dashboard />} />
-          )}
+          <Route path="/dashboard" element={<Dashboard />} />
 
-          {(authToken || userId) && (
-            <Route
-              path="/clientdashboard"
-              element={
-                <ClientDashboard
-                  freelancer={freelancer}
-                  setFreelancer={setFreelancer}
-                />
-              }
-            />
-          )}
+          <Route
+            path="/clientdashboard"
+            element={
+              <ClientDashboard
+                freelancer={freelancer}
+                setFreelancer={setFreelancer}
+              />
+            }
+          />
 
-          {(authToken || userId) && (
-            <Route
-              path="/onboarding"
-              element={<OnBoarding freelancer={freelancer} />}
-            />
-          )}
-          {(authToken || userId) && (
-            <Route path="/clientonboarding" element={<ClientOnBoarding />} />
-          )}
+          <Route
+            path="/onboarding"
+            element={<OnBoarding freelancer={freelancer} />}
+          />
+
+          <Route path="/clientonboarding" element={<ClientOnBoarding />} />
         </Routes>
       </BrowserRouter>
     </div>

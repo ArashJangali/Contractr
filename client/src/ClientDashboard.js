@@ -67,12 +67,14 @@ function ClientDashboard() {
     }
   }
 
+  console.log(user?._id)
+
   useEffect(() => {
     getUser();
   }, []);
 
   return (
-    (freelancer || user?.googleId) && (
+    (user?.googleId) && (
       <div>
         <div className="centerMain">
           <ChatToggle

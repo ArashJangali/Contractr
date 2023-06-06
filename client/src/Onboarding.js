@@ -98,7 +98,7 @@ const OnBoarding = () => {
   }
 
   return (
-    (freelancer || user?.googleId) && (
+    (user?.googleId) && (
       <>
         <Header
           smallState={true}

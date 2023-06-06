@@ -96,7 +96,7 @@ const ClientOnBoarding = () => {
   }
 
   return (
-    (client || user?.googleId) && (
+    (user?.googleId) && (
       <>
         <Header
           smallState={true}
