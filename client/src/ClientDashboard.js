@@ -74,7 +74,7 @@ function ClientDashboard() {
   }, []);
 
   return (
-    
+     (
       <div>
         <div className="centerMain">
           <ChatToggle
