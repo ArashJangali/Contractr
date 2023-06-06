@@ -221,7 +221,7 @@ function Customer({
 
   return (
     <>
-      {user && (
+      (
         <div className="contractrOne">
           <div className="cardContainer">
             {filteredNotLikedClients.map((person, index) => (
@@ -251,7 +251,7 @@ function Customer({
             ))}
           </div>
         </div>
-      )}
+      )
     </>
   );
 }
