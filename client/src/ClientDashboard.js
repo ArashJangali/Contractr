@@ -67,14 +67,14 @@ function ClientDashboard() {
     }
   }
 
-console.log("ClientDashboard user:", user, "googleID:", user.googleId)
+console.log("ClientDashboard user:", user, "googleID:", user?.googleId)
 
   useEffect(() => {
     getUser();
   }, []);
 
   return (
-    (user?.googleId) && (
+    user ? 
       <div>
         <div className="centerMain">
           <ChatToggle
@@ -158,8 +158,11 @@ console.log("ClientDashboard user:", user, "googleID:", user.googleId)
           <Footer />
         </div>
       </div>
+   : (
+   
+    <div>Loading...</div>
     )
-  );
+  )
 }
 
 export default ClientDashboard;
