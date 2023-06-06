@@ -33,7 +33,7 @@ const backendUrl = process.env.BACKEND_URL;
 const corsOptions = {
     origin: frontendUrl,
     methods: ['POST', 'GET', 'PUT', 'PATCH', 'DELETE'],
-    allowHeaders: ['Content type'],
+    allowHeaders: '*',
     credentials: true,
 };
 
