@@ -1312,11 +1312,22 @@ input[type="radio"]:checked+label {
 
 @media (max-width: 600px) {
   .messageSuccess.visible {
-    width: 30%;
-    height: 12%;
-    margin-left: 15px;
+    width: 33%;
+    height: 13%;
+    margin-left: -25px;
+    margin-bottom: -75px;
   }
 .authModal {
+  width: auto;
+}
+
+.preference {
+  margin-top: 95% !important;
+  margin-left: 10px;
+  z-index: 1000;
+}
+
+.contractrOne {
   width: auto;
 }
 
