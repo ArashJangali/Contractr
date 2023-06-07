@@ -109,7 +109,7 @@ const ClientOnBoarding = () => {
       <div className="onboarding">
         <h2 style={{ color: "white" }}>CLIENT PROFILE</h2>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="myForm">
           <section className="first-section">
             <label htmlFor="client_first_name">First Name</label>
             <input

@@ -112,7 +112,7 @@ const OnBoarding = () => {
       <div className="onboarding">
         <h2 style={{ color: "white" }}>CONTRACTOR PROFILE</h2>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="myForm">
           <section className="first-section">
             <label htmlFor="first_name">First Name</label>
             <input
