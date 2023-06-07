@@ -1,14 +1,13 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Home from "./Home";
 import OnBoarding from "./Onboarding";
-import Chat from "./Chat";
 import { useCookies } from "react-cookie";
 import ClientOnBoarding from "./clientOnboarding";
 import ClientDashboard from "./ClientDashboard";
 import axios from "./axios";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["userId"]);

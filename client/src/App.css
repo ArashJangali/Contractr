@@ -17,7 +17,7 @@
   height: 50px;
   position: absolute;
   text-align: center;
-  color: #84848442;
+  color: #84848400;
   bottom: -5px;
 }
 
@@ -1301,3 +1301,23 @@ input[type="radio"]:checked+label {
 /* message smaller devices */
 
 
+@media (min-width: 601px) and (max-width: 768px) {
+  .messageSuccess.visible {
+    width: 35%;
+    height: 13%;
+    margin-bottom: -40px;
+    margin-left: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .messageSuccess.visible {
+    width: 30%;
+    height: 12%;
+    margin-left: 15px;
+  }
+.authModal {
+  width: auto;
+}
+
+}
