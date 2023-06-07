@@ -814,13 +814,23 @@ nav .logo-div .logo {
 
 /* onBoarding  */
 
+@media (min-width: 1024px) {
+  .onboarding form {
+    display: flex;
+    width: auto;
+    margin-left: 250px;
+    color: white;
+    
+  }
+}
+
 .onboarding form {
   display: flex;
-  
+  width: auto;
+
   color: white;
   
 }
-
 
 .onboarding form section {
   display: flex;
@@ -1323,19 +1333,18 @@ input[type="radio"]:checked+label {
 }
 
 .first-section {
-
   width: auto !important;
   height: auto !important;
 }
 
 .right-section {
-  width: 200px !important;
+  width: auto !important;
   height: auto !important;
  
 }
 
 .section-third {
-  width: 20% !important;
+  width: auto !important;
   height: auto !important;
  
 }
@@ -1344,7 +1353,6 @@ input[type="radio"]:checked+label {
   display: flex !important;
   flex-direction: row !important;
   overflow-x:auto !important;
- 
 }
 
 .experience {
