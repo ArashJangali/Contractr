@@ -23,7 +23,7 @@ function ClientDashboard() {
   const [user, setUser] = useState(null);
   const [messageActivate, setMessageActivate] = useState(false);
   const [thumbs, setThumbs] = useState(null);
-  const userId = user?.googleId;
+  const userId = cookies.UserId;
   const [clickedClient, setClickedClient] = useState(null);
   const location = useLocation();
   const isFreelancer = true;
@@ -67,14 +67,12 @@ function ClientDashboard() {
     }
   }
 
-console.log("ClientDashboard userId:", userId, "googleID:", user?.googleId)
-
   useEffect(() => {
     getUser();
   }, []);
 
-  return (
-    user ? 
+  return freelancer ? (
+   
       <div>
         <div className="centerMain">
           <ChatToggle
@@ -158,11 +156,9 @@ console.log("ClientDashboard userId:", userId, "googleID:", user?.googleId)
           <Footer />
         </div>
       </div>
-   : (
-   
-    <div>Loading...</div>
-    )
-  )
+  
+    
+  ) : (<div style={{color: 'white'}}>loading...</div>)
 }
 
 export default ClientDashboard;

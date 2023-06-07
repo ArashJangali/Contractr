@@ -138,7 +138,7 @@ function Contractr({
 
           const dislikedFreelancerId =
             filteredNotLikedFreelancers[currentIndex]?.user_id;
-          console.log(dislikedFreelancerId);
+         
           await axios.put(`${process.env.REACT_APP_BACKEND_URL}/addDislikedFreelancer`, {
             userId,
             dislikedFreelancerId,

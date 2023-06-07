@@ -272,6 +272,7 @@ passport.use(
         if (!user) {
           user = new User({
             googleId: profile.id,
+            user_id: profile.id,
             email: profile.emails[0].value,
           });
           await user.save();
@@ -331,6 +332,7 @@ passport.use(
         if (!user) {
           user = new Client({
             googleId: profile.id,
+            client_user_id: profile.id,
             email: profile.emails[0].value,
           });
           await user.save();
@@ -673,15 +675,16 @@ app.put("/user", async (req, res) => {
 
 app.put("/clientuser", async (req, res) => {
   const clientForm = req.body.clientForm;
-
+  console.log(clientForm)
   try {
     const foundClient = await Client.findOne({
       client_user_id: clientForm.client_user_id,
     });
-
+    
     if (foundClient) {
       const updateClientDoc = {
         $set: {
+          client_user_id: clientForm.client_user_id,
           client_first_name: clientForm.client_first_name,
           client_last_name: clientForm.client_last_name,
           client_talent: clientForm.client_talent,

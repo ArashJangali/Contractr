@@ -161,7 +161,7 @@ const AuthModal = ({
         autoComplete="off"
         onSubmit={handleSubmit}
       >
-        {/* <input
+        <input
           type="email"
           id="email"
           name="email"
@@ -188,11 +188,11 @@ const AuthModal = ({
           />
         )}
         <input className="btn-secondary" type="submit" />
-        <h5>OR</h5> */}
+        {/* <h5>OR</h5>
         <button onClick={googleSignIn} className="btn-secondary-google" type="button">
           <FaGoogle className="google-icon" />{" "}
           {isSignUp ? "Sign Up With Google" : "Sign In With Google"}
-        </button>
+        </button> */}
         {error && <p style={{ marginTop: "10px" }}>{error}</p>}
       </form>
     </div>
