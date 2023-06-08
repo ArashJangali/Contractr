@@ -95,58 +95,60 @@ const AuthModal = ({
       }
     }
   }
-  async function googleSignIn() {
-    const userType = freelancer ? "freelancer" : "client";
+
+
+  // async function googleSignIn() {
+  //   const userType = freelancer ? "freelancer" : "client";
   
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
-    const authUrl = isSignUp
-      ? `${backendUrl}/auth/google/${userType}/signup`
-      : `${backendUrl}/auth/google/${userType}/login`;
+  //   const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  //   const authUrl = isSignUp
+  //     ? `${backendUrl}/auth/google/${userType}/signup`
+  //     : `${backendUrl}/auth/google/${userType}/login`;
 
-    const authWindow = window.open(authUrl, "_blank", "width=500,height=600");
-  }
+  //   const authWindow = window.open(authUrl, "_blank", "width=500,height=600");
+  // }
 
-  useEffect(() => {
-    function handleMessage(event) {
-      let redirectUrl = "";
+  // useEffect(() => {
+  //   function handleMessage(event) {
+  //     let redirectUrl = "";
 
-      if (event.data.message === "Successful login") {
-        if (!isSignUp) {
-          if (freelancer) {
-            redirectUrl = "/clientdashboard";
-          } else {
-            redirectUrl = "/dashboard";
-          }
-        }
-      } else if (event.data.message === "Account created successfully!") {
-        if (isSignUp) {
-          if (freelancer) {
-            redirectUrl = "/onboarding";
-          } else {
-            redirectUrl = "/clientonboarding";
-          }
-        }
-      }
+  //     if (event.data.message === "Successful login") {
+  //       if (!isSignUp) {
+  //         if (freelancer) {
+  //           redirectUrl = "/clientdashboard";
+  //         } else {
+  //           redirectUrl = "/dashboard";
+  //         }
+  //       }
+  //     } else if (event.data.message === "Account created successfully!") {
+  //       if (isSignUp) {
+  //         if (freelancer) {
+  //           redirectUrl = "/onboarding";
+  //         } else {
+  //           redirectUrl = "/clientonboarding";
+  //         }
+  //       }
+  //     }
 
-      const userType = freelancer ? freelancer : client;
+  //     const userType = freelancer ? freelancer : client;
 
-      if (event.data.status === "success") {
-        navigate(redirectUrl, { state: { userType: true } });
-      } else if (
-        event.data.message === "Login failed. Please press 'CREATE ACCOUNT'"
-      ) {
-        setError("Login failed. Please Create an Account.");
-      } else {
-        setError("Login failed. Please Create an Account.");
-      }
-    }
+  //     if (event.data.status === "success") {
+  //       navigate(redirectUrl, { state: { userType: true } });
+  //     } else if (
+  //       event.data.message === "Login failed. Please press 'CREATE ACCOUNT'"
+  //     ) {
+  //       setError("Login failed. Please Create an Account.");
+  //     } else {
+  //       setError("Login failed. Please Create an Account.");
+  //     }
+  //   }
 
-    window.addEventListener("message", handleMessage);
+  //   window.addEventListener("message", handleMessage);
 
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("message", handleMessage);
+  //   };
+  // }, []);
 
   return (
     <div className="authModal">
