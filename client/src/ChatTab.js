@@ -10,6 +10,8 @@ function ChatTab({
   clickedClient,
   isFreelancer,
 }) {
+
+  console.log(clickedClient)
   return (
     <>
       <MessageInput

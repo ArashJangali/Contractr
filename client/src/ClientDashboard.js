@@ -49,6 +49,8 @@ function ClientDashboard() {
     setLikeClicked(true);
   }
 
+  
+
   function handleDislikeClick() {
     setDislikeClicked(true);
   }
@@ -102,6 +104,7 @@ function ClientDashboard() {
               isFreelancer={isFreelancer}
               messageVisible={messageActivate || messageClicked}
               removeCookie={removeCookie}
+              clickedClient={clickedClient}
               cookies={cookies}
               user={user}
             />

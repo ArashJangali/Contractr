@@ -91,7 +91,11 @@ function Connections({
   function handleClientClick(likedPerson) {
     setClickedClient(likedPerson);
     selectedPerson ? setSelectedPerson(false) : setSelectedPerson(likedPerson);
+    
   }
+
+  
+  
 
   function handleFreelancerClick(likedPerson) {
     setClickedFreelancer(likedPerson);

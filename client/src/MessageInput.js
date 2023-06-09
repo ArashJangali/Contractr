@@ -66,6 +66,11 @@ function MessageInput({
     getMessage();
   }, [messages]);
 
+  console.log('isFreelancer: ', isFreelancer);
+console.log('clickedClient: ', clickedClient);
+console.log('clickedFreelancer: ', clickedFreelancer);
+console.log('receiverId: ', receiverId);
+
   return (
     <div className="message-input">
       <textarea

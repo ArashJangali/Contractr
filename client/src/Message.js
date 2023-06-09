@@ -12,6 +12,8 @@ function Message({
   clickedFreelancer,
   clickedClient,
 }) {
+
+  console.log(clickedClient)
   return (
     <div className={`message-container${messageVisible ? " visible" : ""}`}>
       {/* {clickedFreelancer && <ChatTab clickedFreelancer={clickedFreelancer} />} */}
