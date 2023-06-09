@@ -70,7 +70,7 @@ const OnBoarding = () => {
         { formData }
       );
       const success = response.status === 200;
-      console.log(response);
+      
       if (success) navigate("/clientdashboard");
     } catch (err) {
       console.log(err);

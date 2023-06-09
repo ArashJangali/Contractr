@@ -922,6 +922,8 @@ input[type="radio"]:checked+label {
 .pic-container {
   display: flex;
   flex-direction: column;
+  height: fit-content;
+  max-width: fit-content;
 }
 
 .right-section input[type="submit"] {
